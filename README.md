@@ -1,11 +1,36 @@
+# Web LAB -1 - Hello Project
 
-  # Animasyonlu Portföy Web Sitesi
+## Hakkinda
 
-  This is a code bundle for Animasyonlu Portföy Web Sitesi. The original project is available at https://www.figma.com/design/YQ2RNln8CBn7WzKnI6zN93/Animasyonlu-Portf%C3%B6y-Web-Sitesi.
+Bu proje , Web Tasarimi ve Programlama dersi LAB -1 kapsaminda
+Vite + React + TypeScript kullanilarak olusturulmustur.
 
-  ## Running the code
+## Gelistirici
 
-  Run `npm i` to install the dependencies.
+- \*Ad Soyad: Fatma Nur Karagöz
+- \*Ogrenci No: 230541018
 
-  Run `npm run dev` to start the development server.
-  
+## Kullanilan Teknolojiler
+
+- React 18
+- TypeScript
+- Vite
+
+## Kurulum
+
+`bash
+ npm install
+ `
+
+## Calistirma
+
+`bash
+ npm run dev
+ `
+Tarayicida http://localhost:5173 adresini ac.
+
+## Demo Görseli
+
+Aşağıda portföy sayfamın bir ekran görüntüsü yer alıyor:
+
+![Portföy Sayfası](public/portfoySayfasi.png)
