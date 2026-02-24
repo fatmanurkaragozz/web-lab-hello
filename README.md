@@ -31,6 +31,6 @@ Tarayicida http://localhost:5173 adresini ac.
 
 ## Demo Görseli
 
-Aşağıda portföy sayfamın bir ekran görüntüsü yer alıyor:
+Aşağıda portföy sayfamın bir ekran görüntüsü yer alıyor inceleyebilirsiniz:
 
 ![Portföy Sayfası](public/portfoySayfasi.png)
