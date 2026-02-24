@@ -8,64 +8,35 @@ export function BlogPage({ onBack }: BlogPageProps) {
   const articles = [
     {
       id: 1,
-      title: "React 18'in Yeni Özellikleri ve Performans İyileştirmeleri",
-      excerpt: "React 18 ile gelen Concurrent Features, Automatic Batching ve diğer önemli güncellemeleri keşfedin.",
-      readTime: "8 dk okuma",
-      date: "15 Mart 2024",
+      title: "ŞAH MAT : YAPAY ZEKA VS İNSAN",
+      excerpt: "Geçenlerde bir satranç turnuvasına katıldım ve gerçekten güçlü rakiplerle karşılaştım. Her maçta zorlu hamleler, stratejik hesaplamalar derken aklıma bir soru takıldı: “Acaba dünyanın en iyi satranç oyuncularından biriyle oynasaydım nasıl bir sonuç alırdım?” Ama bu kez rakibim bir insan değil, bir yapay zekâ olacaktı.",
+      readTime: "4 dk okuma",
+      date: "14 Mart 2025",
       tags: ["React", "JavaScript", "Frontend"],
       image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop",
-      url: "#"
+      url: "https://medium.com/@fatmaNurK/%C5%9Fah-mat-yapay-zeka-vs-i%CC%87nsan-63c841406ad9"
     },
     {
       id: 2,
-      title: "TypeScript ile Daha Güvenli Web Geliştirme",
-      excerpt: "TypeScript'in sunduğu tip güvenliği ile nasıl daha kaliteli kod yazabileceğimizi öğrenin.",
-      readTime: "12 dk okuma",
-      date: "8 Mart 2024",
+      title: "Matrislerin Yazılım Dünyasındaki Evrimi ve Reginald Denny Olayı: Matematiğin Suç Tespitindeki Gücü",
+      excerpt: "Matrisler, günümüzde birçok bilimsel ve teknolojik alanda kritik bir araç olarak kullanılmaktadır. Tarih boyunca bu matematiksel yapı, farklı alanlarda gelişerek bugünkü güçlü halini almıştır.",
+      readTime: "3 dk okuma",
+      date: "20 Şubat 2025",
       tags: ["TypeScript", "JavaScript", "Development"],
       image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=200&fit=crop",
-      url: "#"
+      url: "https://medium.com/@fatmaNurK/matrislerin-yaz%C4%B1l%C4%B1m-d%C3%BCnyas%C4%B1ndaki-evrimi-ve-reginald-denny-olay%C4%B1-matemati%C4%9Fin-su%C3%A7-tespitindeki-g%C3%BCc%C3%BC-edaf787fbc74"
     },
     {
       id: 3,
-      title: "Next.js 14 ile Full-Stack Uygulama Geliştirme",
-      excerpt: "Next.js'in en son sürümü ile Server Components ve App Router kullanarak modern web uygulamaları geliştirin.",
-      readTime: "15 dk okuma",
-      date: "1 Mart 2024",
+      title: "Yapay Zeka ve Veri Bilimi: Geleceği İnşa Eden Güçler",
+      excerpt: "Yapay zeka ve makine öğrenimi, günümüz dünyasında hayatın birçok alanında devrim yaratıyor. Bu yazıda, yapay zekanın farklı sektörlerdeki kullanım alanlarını, ilgili algoritmaları ve gerçek dünya örnekleriyle inceleyeceğiz. Ayrıca veri bilimi ve yapay zekaya ilgi duyanlar için temel kavramlara da değineceğiz.",
+      readTime: "3 dk okuma",
+      date: "27 Ocak 2025",
       tags: ["Next.js", "React", "Full-Stack"],
       image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
-      url: "#"
+      url: "https://medium.com/@fatmaNurK/yapay-zeka-ve-veri-bilimi-gelece%C4%9Fi-i%CC%87n%C5%9Fa-eden-g%C3%BC%C3%A7ler-5bd1611ab05f"
     },
-    {
-      id: 4,
-      title: "Modern CSS: Grid ve Flexbox ile Responsive Tasarım",
-      excerpt: "CSS Grid ve Flexbox teknolojilerini kullanarak responsive ve esnek layoutlar oluşturun.",
-      readTime: "10 dk okuma",
-      date: "22 Şubat 2024",
-      tags: ["CSS", "Responsive", "Design"],
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop",
-      url: "#"
-    },
-    {
-      id: 5,
-      title: "Node.js ile RESTful API Geliştirme Best Practices",
-      excerpt: "Node.js ve Express kullanarak ölçeklenebilir ve güvenli API'lar geliştirmenin en iyi yöntemleri.",
-      readTime: "18 dk okuma",
-      date: "14 Şubat 2024",
-      tags: ["Node.js", "API", "Backend"],
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=200&fit=crop",
-      url: "#"
-    },
-    {
-      id: 6,
-      title: "Web Performance Optimization: Hız ve Kullanıcı Deneyimi",
-      excerpt: "Web sitelerinizin performansını artırmak için uygulanabilir teknikler ve araçlar.",
-      readTime: "14 dk okuma",
-      date: "7 Şubat 2024",
-      tags: ["Performance", "UX", "Optimization"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
-      url: "#"
-    }
+    
   ];
 
   return (

@@ -249,7 +249,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
                   >
                     <h3 className="text-gray-800 mb-3">Hakkımda</h3>
                     <p className="text-gray-700 leading-relaxed">
-                      Modern web teknolojileri ile kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar geliştiriyorum. 
+                      Yazılım Mühendisliği öğrencisiyim. Kitap okkumayı, doğa yürüyüşü yapmayı ve kahve içmeyi çok seviyorum. Modern web teknolojileri ile kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar geliştiriyorum. 
                       Yaratıcılık ve teknolojiyi birleştirerek kullanıcı deneyimini ön planda tutan çözümler üretmeyi seviyorum.
                     </p>
                   </motion.div>

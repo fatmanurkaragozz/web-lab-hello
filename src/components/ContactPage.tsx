@@ -30,8 +30,8 @@ export function ContactPage({ onBack }: ContactPageProps) {
     {
       icon: "📧",
       title: "E-posta",
-      value: "your.email@example.com",
-      link: "mailto:your.email@example.com"
+      value: "fk6895164@gmail.com",
+      link: "mailto:fk6895164@gmail.com"
     },
     {
       icon: "📱",
@@ -42,7 +42,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
     {
       icon: "📍",
       title: "Konum",
-      value: "İstanbul, Türkiye",
+      value: "  Ankara, Türkiye",
       link: "#"
     },
     {
