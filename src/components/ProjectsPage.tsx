@@ -8,8 +8,8 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
   const projects = [
     {
       id: 1,
-      title: "E-Ticaret Platformu",
-      description: "Modern React ve Node.js ile geliştirilmiş tam özellikli e-ticaret sitesi",
+      title: "TART",
+      description: "Modern React ve Node.js ile geliştirilmiş gençler için tartışma platformu",
       tech: ["React", "Node.js", "MongoDB", "Stripe"],
       image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
       github: "#",
@@ -53,8 +53,8 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
     },
     {
       id: 6,
-      title: "Video Konferans Uygulaması",
-      description: "WebRTC teknolojisi ile gerçek zamanlı video görüşme",
+      title: "Hastane Otomasyonu",
+      description: "Hastane yönetimi için kapsamlı otomasyon sistemi",
       tech: ["React", "WebRTC", "Socket.io", "Node.js"],
       image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop",
       github: "#",
@@ -64,12 +64,41 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-8"
+      className="relative min-h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 p-8 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="max-w-7xl mx-auto">
+      {/* arka plan bulutları (intro sayfasından daha sade bir versiyon) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* ufukta güneş */}
+        <motion.div
+          className="absolute top-8 right-8 w-12 h-12 bg-yellow-300 rounded-full opacity-70"
+          animate={{ rotate: 360, boxShadow: [
+            "0 0 15px rgba(253, 224, 71, 0.4)",
+            "0 0 25px rgba(253, 224, 71, 0.6)",
+            "0 0 15px rgba(253, 224, 71, 0.4)"
+          ] }}
+          transition={{ rotate: { duration: 20, repeat: Infinity, ease: "linear" }, boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" } }}
+        />
+        <motion.div
+          className="absolute top-24 left-10 w-24 h-12 bg-white rounded-full opacity-80"
+          animate={{ x: [0, 40, 0] }}
+          transition={{ duration: 12, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-40 right-1/3 w-28 h-14 bg-white rounded-full opacity-70"
+          animate={{ x: [0, -35, 0] }}
+          transition={{ duration: 9, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-16 right-1/4 w-20 h-10 bg-white rounded-full opacity-60"
+          animate={{ x: [0, 30, 0] }}
+          transition={{ duration: 15, repeat: Infinity }}
+        />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto z-10">
         {/* Header */}
         <motion.div
           className="flex items-center justify-between mb-12"
@@ -78,10 +107,10 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <div>
-            <h1 className="text-5xl mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl mb-4 text-white drop-shadow-2xl">
               Projelerim
             </h1>
-            <p className="text-gray-600 text-xl">Geliştirdiğim bazı projeler ve uygulamalar</p>
+            <p className="text-white/90 text-xl drop-shadow">Geliştirdiğim bazı projeler ve uygulamalar</p>
           </div>
           
           <motion.button
@@ -107,7 +136,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 * index, duration: 0.6 }}
@@ -123,14 +152,14 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl mb-3 text-gray-800">{project.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                <h3 className="text-xl mb-3 text-gray-900">{project.title}</h3>
+                <p className="text-gray-700 mb-4 leading-relaxed">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                      className="px-3 py-1 bg-white/60 text-blue-700 rounded-full text-sm backdrop-blur-sm"
                     >
                       {tech}
                     </span>
@@ -140,7 +169,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
                 <div className="flex space-x-3">
                   <motion.a
                     href={project.github}
-                    className="flex-1 bg-gray-900 text-white py-2 px-4 rounded-lg text-center hover:bg-gray-800 transition-colors"
+                    className="flex-1 bg-white/90 text-gray-900 py-2 px-4 rounded-lg text-center hover:bg-white/100 transition-colors backdrop-blur-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
