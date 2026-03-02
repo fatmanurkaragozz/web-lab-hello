@@ -81,7 +81,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
   ];
 
   return (
-    <motion.div
+    <motion.main
       className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -89,7 +89,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <motion.div
+        <motion.header
           className="flex items-center justify-between mb-12"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -101,7 +101,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
             </h1>
             <p className="text-gray-600 text-xl">Projeleriniz için benimle iletişime geçebilirsiniz</p>
           </div>
-          
+
           <motion.button
             onClick={onBack}
             className="bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all"
@@ -113,86 +113,107 @@ export function ContactPage({ onBack }: ContactPageProps) {
               <span>Geri Dön</span>
             </span>
           </motion.button>
-        </motion.div>
+        </motion.header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div
+          <motion.section
             className="bg-white rounded-2xl shadow-xl p-8"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
             <h2 className="text-2xl mb-6 text-gray-800">Mesaj Gönder</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-gray-700 mb-2">Ad Soyad</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
-                    placeholder="Adınız ve Soyadınız"
-                    required
-                  />
+
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <fieldset className="border border-gray-200 rounded-xl p-6">
+                <legend className="text-xl px-2 text-gray-800 font-medium">İletişim Formu</legend>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div className="form-group">
+                    <label htmlFor="name" className="block text-gray-700 mb-2">Ad Soyad:</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
+                      placeholder="Adınız ve Soyadınız"
+                      required
+                      minLength={2}
+                      aria-describedby="name-error"
+                    />
+                    <small id="name-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="email" className="block text-gray-700 mb-2">E-posta:</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
+                      placeholder="E-posta adresiniz"
+                      required
+                      aria-describedby="email-error"
+                    />
+                    <small id="email-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
+                  </div>
                 </div>
-                
-                <div>
-                  <label className="block text-gray-700 mb-2">E-posta</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
-                    placeholder="E-posta adresiniz"
+
+                <div className="form-group mt-6">
+                  <label htmlFor="subject" className="block text-gray-700 mb-2">Konu:</label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors bg-white"
                     required
-                  />
+                    aria-describedby="subject-error"
+                  >
+                    <option value="">-- Seçiniz --</option>
+                    <option value="is">İş Teklifi</option>
+                    <option value="soru">Soru</option>
+                    <option value="oneri">Öneri</option>
+                  </select>
+                  <small id="subject-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
                 </div>
-              </div>
-              
-              <div>
-                <label className="block text-gray-700 mb-2">Konu</label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
-                  placeholder="Mesaj konusu"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label className="block text-gray-700 mb-2">Mesaj</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors resize-none"
-                  placeholder="Mesajınızı buraya yazın..."
-                  required
-                />
-              </div>
-              
-              <motion.button
-                type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="flex items-center justify-center space-x-2">
-                  <span>Mesaj Gönder</span>
-                  <span>📨</span>
-                </span>
-              </motion.button>
+
+                <div className="form-group mt-6">
+                  <label htmlFor="message" className="block text-gray-700 mb-2">Mesajınız:</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors resize-none"
+                    placeholder="Mesajınızı buraya yazın..."
+                    required
+                    minLength={10}
+                    aria-describedby="message-error"
+                  />
+                  <small id="message-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
+                </div>
+
+                <motion.button
+                  type="submit"
+                  className="w-full mt-8 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all font-medium text-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="flex items-center justify-center space-x-2">
+                    <span>Gönder</span>
+                    <span>📨</span>
+                  </span>
+                </motion.button>
+              </fieldset>
             </form>
-          </motion.div>
+          </motion.section>
 
           {/* Contact Info */}
           <motion.div
@@ -204,7 +225,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
             {/* Contact Details */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h2 className="text-2xl mb-6 text-gray-800">İletişim Bilgileri</h2>
-              
+
               <div className="space-y-4">
                 {contacts.map((contact, index) => (
                   <motion.a
@@ -229,7 +250,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
             {/* Social Links */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h2 className="text-2xl mb-6 text-gray-800">Sosyal Medya</h2>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -263,6 +284,6 @@ export function ContactPage({ onBack }: ContactPageProps) {
           </motion.div>
         </div>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

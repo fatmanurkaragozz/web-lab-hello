@@ -34,3 +34,7 @@ Tarayicida http://localhost:5173 adresini ac.
 Aşağıda portföy sayfamın bir ekran görüntüsü yer alıyor inceleyebilirsiniz:
 
 ![Portföy Sayfası](public/portfoySayfasi.png)
+
+Lighthouse Raporu: 
+
+![Lighthouse Raporu](public/LighthouseRaporu.png)

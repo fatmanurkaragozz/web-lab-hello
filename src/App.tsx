@@ -30,5 +30,17 @@ export default function App() {
     }
   };
 
-  return <div className="size-full">{renderPage()}</div>;
+  return (
+    <div className="size-full">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-blue-600 px-4 py-2 rounded-md z-[9999] font-bold shadow-lg"
+      >
+        Ana içeriğe atla
+      </a>
+      <div id="main-content" tabIndex={-1} className="size-full outline-none">
+        {renderPage()}
+      </div>
+    </div>
+  );
 }

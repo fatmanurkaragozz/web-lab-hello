@@ -46,25 +46,25 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 overflow-hidden">
+    <main className="relative w-full h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 overflow-hidden">
       {/* Arka plan - bulutlar */}
       <div className="absolute inset-0">
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-1/4 w-20 h-10 bg-white rounded-full opacity-90"
           animate={{ x: [0, 60, 0] }}
           transition={{ duration: 12, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-32 right-1/3 w-24 h-12 bg-white rounded-full opacity-80"
           animate={{ x: [0, -40, 0] }}
           transition={{ duration: 8, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-16 right-1/4 w-16 h-8 bg-white rounded-full opacity-70"
           animate={{ x: [0, 50, 0] }}
           transition={{ duration: 15, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-48 left-1/3 w-28 h-14 bg-white rounded-full opacity-60"
           animate={{ x: [0, 30, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
@@ -72,9 +72,9 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
       </div>
 
       {/* Güneş */}
-      <motion.div 
+      <motion.div
         className="absolute top-8 right-8 w-16 h-16 bg-yellow-400 rounded-full"
-        animate={{ 
+        animate={{
           rotate: 360,
           boxShadow: [
             "0 0 20px rgba(251, 191, 36, 0.5)",
@@ -82,7 +82,7 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
             "0 0 20px rgba(251, 191, 36, 0.5)"
           ]
         }}
-        transition={{ 
+        transition={{
           rotate: { duration: 20, repeat: Infinity, ease: "linear" },
           boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" }
         }}
@@ -112,27 +112,27 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
           className="absolute"
           initial={{ x: -100, y: 200 }}
           animate={
-            animationStage === 'flying' 
-              ? { 
-                  x: window.innerWidth / 2 + 50, 
-                  y: 150,
-                  transition: { duration: 3.5, ease: "easeInOut" }
-                }
-              : { 
-                  x: window.innerWidth / 2 + 80, 
-                  y: 400, 
-                  rotate: 90,
-                  transition: { duration: 0.8, ease: "easeIn" }
-                }
+            animationStage === 'flying'
+              ? {
+                x: window.innerWidth / 2 + 50,
+                y: 150,
+                transition: { duration: 3.5, ease: "easeInOut" }
+              }
+              : {
+                x: window.innerWidth / 2 + 80,
+                y: 400,
+                rotate: 90,
+                transition: { duration: 0.8, ease: "easeIn" }
+              }
           }
         >
           <Bird />
-          
+
           {/* Kuşun ayağındaki mektup (sadece uçarken) - daha büyük */}
           {animationStage === 'flying' && (
-            <motion.div 
+            <motion.div
               className="absolute -bottom-4 left-12"
-              animate={{ 
+              animate={{
                 y: [0, -4, 0],
                 rotate: [0, 10, -10, 0]
               }}
@@ -142,8 +142,8 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
               }}
             >
               <svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="25" rx="4" fill="#F7FAFC" stroke="#CBD5E0" strokeWidth="2"/>
-                <polygon points="4,4 20,15 36,4" fill="none" stroke="#CBD5E0" strokeWidth="2"/>
+                <rect width="40" height="25" rx="4" fill="#F7FAFC" stroke="#CBD5E0" strokeWidth="2" />
+                <polygon points="4,4 20,15 36,4" fill="none" stroke="#CBD5E0" strokeWidth="2" />
                 <circle cx="20" cy="18" r="5" fill="#DC2626" />
               </svg>
             </motion.div>
@@ -155,14 +155,14 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
       {animationStage === 'letterFalling' && (
         <motion.div
           className="absolute"
-          initial={{ 
-            x: window.innerWidth / 2 + 50, 
+          initial={{
+            x: window.innerWidth / 2 + 50,
             y: 180,
             rotate: 45,
             scale: 0.4
           }}
-          animate={{ 
-            x: window.innerWidth / 2 - 100, 
+          animate={{
+            x: window.innerWidth / 2 - 100,
             y: window.innerHeight / 2 - 60,
             rotate: 0,
             scale: 1
@@ -179,8 +179,8 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
       {/* Açılan mektup - tam ekran merkezde */}
       {(animationStage === 'letterOpen' || animationStage === 'completed') && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Letter 
-            isOpen={true} 
+          <Letter
+            isOpen={true}
             onNavigate={onNavigate}
             onAnimationComplete={() => {
               setTimeout(() => setAnimationStage('completed'), 4000);
@@ -225,9 +225,9 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5 }}
         >
-          <motion.h1 
+          <motion.h1
             className="text-5xl text-white mb-3 drop-shadow-2xl"
-            animate={{ 
+            animate={{
               textShadow: [
                 "0 0 15px rgba(255,255,255,0.5)",
                 "0 0 25px rgba(255,255,255,0.8)",
@@ -246,9 +246,9 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
       {animationStage === 'crashed' && (
         <motion.div
           className="absolute"
-          style={{ 
-            x: window.innerWidth / 2 + 65, 
-            y: 155 
+          style={{
+            x: window.innerWidth / 2 + 65,
+            y: 155
           }}
           initial={{ scale: 0, opacity: 1 }}
           animate={{ scale: 3, opacity: 0 }}
@@ -262,9 +262,9 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
       {animationStage === 'letterFalling' && (
         <motion.div
           className="absolute"
-          style={{ 
-            x: window.innerWidth / 2, 
-            y: 200 
+          style={{
+            x: window.innerWidth / 2,
+            y: 200
           }}
         >
           {[...Array(8)].map((_, i) => (
@@ -297,6 +297,6 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
           transition={{ delay: 1.5, duration: 1 }}
         />
       )}
-    </div>
+    </main>
   );
 }
