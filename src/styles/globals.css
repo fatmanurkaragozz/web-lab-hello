@@ -127,6 +127,12 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Klavye navigasyonu için belirgin odak (focus) göstergesi */
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
 /**

@@ -63,7 +63,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
   ];
 
   return (
-    <motion.div
+    <motion.main
       className="relative min-h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 p-8 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -74,11 +74,13 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
         {/* ufukta güneş */}
         <motion.div
           className="absolute top-8 right-8 w-12 h-12 bg-yellow-300 rounded-full opacity-70"
-          animate={{ rotate: 360, boxShadow: [
-            "0 0 15px rgba(253, 224, 71, 0.4)",
-            "0 0 25px rgba(253, 224, 71, 0.6)",
-            "0 0 15px rgba(253, 224, 71, 0.4)"
-          ] }}
+          animate={{
+            rotate: 360, boxShadow: [
+              "0 0 15px rgba(253, 224, 71, 0.4)",
+              "0 0 25px rgba(253, 224, 71, 0.6)",
+              "0 0 15px rgba(253, 224, 71, 0.4)"
+            ]
+          }}
           transition={{ rotate: { duration: 20, repeat: Infinity, ease: "linear" }, boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" } }}
         />
         <motion.div
@@ -100,7 +102,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
 
       <div className="relative max-w-7xl mx-auto z-10">
         {/* Header */}
-        <motion.div
+        <motion.header
           className="flex items-center justify-between mb-12"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -112,7 +114,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
             </h1>
             <p className="text-white/90 text-xl drop-shadow">Geliştirdiğim bazı projeler ve uygulamalar</p>
           </div>
-          
+
           <motion.button
             onClick={onBack}
             className="bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all"
@@ -124,17 +126,17 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
               <span>Geri Dön</span>
             </span>
           </motion.button>
-        </motion.div>
+        </motion.header>
 
         {/* Projects Grid */}
-        <motion.div
+        <motion.section
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           {projects.map((project, index) => (
-            <motion.div
+            <motion.article
               key={project.id}
               className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
               initial={{ y: 50, opacity: 0 }}
@@ -145,16 +147,16 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
               <div className="relative overflow-hidden">
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} projesinin ekran görüntüsü`}
                   className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
               </div>
-              
+
               <div className="p-6">
-                <h3 className="text-xl mb-3 text-gray-900">{project.title}</h3>
+                <h2 className="text-xl mb-3 text-gray-900">{project.title}</h2>
                 <p className="text-gray-700 mb-4 leading-relaxed">{project.description}</p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
                     <span
@@ -165,7 +167,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="flex space-x-3">
                   <motion.a
                     href={project.github}
@@ -185,10 +187,10 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
                   </motion.a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
-        </motion.div>
+        </motion.section>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

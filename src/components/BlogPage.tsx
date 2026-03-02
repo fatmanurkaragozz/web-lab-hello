@@ -36,11 +36,11 @@ export function BlogPage({ onBack }: BlogPageProps) {
       image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
       url: "https://medium.com/@fatmaNurK/yapay-zeka-ve-veri-bilimi-gelece%C4%9Fi-i%CC%87n%C5%9Fa-eden-g%C3%BC%C3%A7ler-5bd1611ab05f"
     },
-    
+
   ];
 
   return (
-    <motion.div
+    <motion.main
       className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -48,7 +48,7 @@ export function BlogPage({ onBack }: BlogPageProps) {
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <motion.div
+        <motion.header
           className="flex items-center justify-between mb-12"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -60,7 +60,7 @@ export function BlogPage({ onBack }: BlogPageProps) {
             </h1>
             <p className="text-gray-600 text-xl">Teknoloji, geliştirme ve deneyimler üzerine yazılarım</p>
           </div>
-          
+
           <motion.button
             onClick={onBack}
             className="bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all"
@@ -72,10 +72,10 @@ export function BlogPage({ onBack }: BlogPageProps) {
               <span>Geri Dön</span>
             </span>
           </motion.button>
-        </motion.div>
+        </motion.header>
 
         {/* Articles Grid */}
-        <motion.div
+        <motion.section
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -100,20 +100,20 @@ export function BlogPage({ onBack }: BlogPageProps) {
                   <span className="text-sm text-gray-600">{article.readTime}</span>
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <div className="flex items-center space-x-2 mb-3">
                   <span className="text-sm text-gray-500">{article.date}</span>
                 </div>
-                
+
                 <h2 className="text-xl mb-3 text-gray-800 leading-tight hover:text-blue-600 transition-colors">
                   {article.title}
                 </h2>
-                
+
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   {article.excerpt}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {article.tags.map((tag) => (
                     <span
@@ -124,7 +124,7 @@ export function BlogPage({ onBack }: BlogPageProps) {
                     </span>
                   ))}
                 </div>
-                
+
                 <motion.a
                   href={article.url}
                   className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
@@ -136,7 +136,7 @@ export function BlogPage({ onBack }: BlogPageProps) {
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </motion.section>
 
         {/* Medium Profile Link */}
         <motion.div
@@ -157,6 +157,6 @@ export function BlogPage({ onBack }: BlogPageProps) {
           </motion.a>
         </motion.div>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }
