@@ -1,7 +1,13 @@
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
+@import "./styles/tokens.css";
+
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
-    *, :before, :after, ::backdrop {
+
+    *,
+    :before,
+    :after,
+    ::backdrop {
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
@@ -69,7 +75,9 @@
 }
 
 @layer theme {
-  :root, :host {
+
+  :root,
+  :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-red-400: oklch(.704 .191 22.216);
@@ -161,7 +169,11 @@
 }
 
 @layer base {
-  *, :after, :before, ::backdrop {
+
+  *,
+  :after,
+  :before,
+  ::backdrop {
     box-sizing: border-box;
     border: 0 solid;
     margin: 0;
@@ -175,7 +187,8 @@
     padding: 0;
   }
 
-  html, :host {
+  html,
+  :host {
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
     line-height: 1.5;
@@ -200,7 +213,12 @@
     text-decoration: underline dotted;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: inherit;
     font-weight: inherit;
   }
@@ -212,11 +230,15 @@
     text-decoration: inherit;
   }
 
-  b, strong {
+  b,
+  strong {
     font-weight: bolder;
   }
 
-  code, kbd, samp, pre {
+  code,
+  kbd,
+  samp,
+  pre {
     font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
     font-feature-settings: var(--default-mono-font-feature-settings, normal);
     font-variation-settings: var(--default-mono-font-variation-settings, normal);
@@ -227,7 +249,8 @@
     font-size: 80%;
   }
 
-  sub, sup {
+  sub,
+  sup {
     vertical-align: baseline;
     font-size: 75%;
     line-height: 0;
@@ -260,21 +283,35 @@
     display: list-item;
   }
 
-  ol, ul, menu {
+  ol,
+  ul,
+  menu {
     list-style: none;
   }
 
-  img, svg, video, canvas, audio, iframe, embed, object {
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
     vertical-align: middle;
     display: block;
   }
 
-  img, video {
+  img,
+  video {
     max-width: 100%;
     height: auto;
   }
 
-  button, input, select, optgroup, textarea {
+  button,
+  input,
+  select,
+  optgroup,
+  textarea {
     font: inherit;
     font-feature-settings: inherit;
     font-variation-settings: inherit;
@@ -386,7 +423,8 @@
     box-shadow: none;
   }
 
-  button, input:where([type="button"], [type="reset"], [type="submit"]) {
+  button,
+  input:where([type="button"], [type="reset"], [type="submit"]) {
     appearance: button;
   }
 
@@ -463,7 +501,8 @@
     line-height: 1.5;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label, :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label,
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
@@ -920,7 +959,7 @@
   }
 
   .rounded-xl {
-    border-radius: calc(var(--radius)  + 4px);
+    border-radius: calc(var(--radius) + 4px);
   }
 
   .rounded-t-2xl {
@@ -1560,6 +1599,441 @@
     filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
   }
 
+  /* ===== HEADER ===== */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* Logo / Site adi */
+  .site-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  /* ===== NAV LISTESI ===== */
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: var(--space-sm);
+    padding: 0;
+    margin: 0;
+  }
+
+  nav a {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  nav a:hover,
+  nav a:focus {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  /* ===== MOBiLDE DiKEY YIGIN ===== */
+  @media (max-width: 639px) {
+    header {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    nav ul {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    nav a {
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  /* --- Uygulama-5: Toolbar (Beceri Etiketleri) --- */
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    padding: 0;
+  }
+
+  .skill-tags li {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+  }
+
+  /* ===== PROJE GRID ===== */
+  .project-grid {
+    display: grid;
+    /* Sihirli satir: otomatik responsive grid! */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  /* ===== PROJE KARTI ===== */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform var(--transition-normal),
+      box-shadow var(--transition-normal);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Kart icindeki gorsel */
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  /* Kart icerigi */
+  .project-card h3,
+  .project-card p,
+  .project-card .skill-tags {
+    padding: 0 var(--space-lg);
+  }
+
+  .project-card h3 {
+    margin-top: var(--space-md);
+    font-size: var(--text-lg);
+  }
+
+  .project-card p {
+    color: var(--color-muted);
+    flex-grow: 1;
+    /* icerik farkli uzunlukta olsa
+    bile kartlarin alt kenari hizali */
+  }
+
+  .project-card .skill-tags {
+    padding-bottom: var(--space-lg);
+    margin-top: auto;
+  }
+
+  /* ========================================
+  Ozel Bilesen CSS (Letter & PortfolioIntro)
+  ======================================== */
+  .intro-title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .letter-wrapper {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    width: 95vw;
+    max-width: 900px;
+    min-height: 500px;
+    padding: var(--space-lg);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .profile-mobile {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1rem auto;
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 4px solid white;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .profile-mobile-name {
+    display: block;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-mobile-name span {
+    background-color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .profile-desktop {
+    display: none;
+  }
+
+  .letter-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .letter-header-line {
+    width: 6rem;
+    height: 0.5rem;
+    background: linear-gradient(to right, #3b82f6, #a855f7);
+    border-radius: 9999px;
+    margin: 0 auto;
+  }
+
+  .letter-content-inner {
+    padding-right: 0;
+  }
+
+  .letter-grid-2,
+  .letter-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .intro-title {
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .letter-wrapper {
+      padding: 2.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .profile-mobile {
+      display: none;
+    }
+
+    .profile-mobile-name {
+      display: none;
+    }
+
+    .profile-desktop {
+      display: block;
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      z-index: 30;
+    }
+
+    .letter-header {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .letter-header-line {
+      width: 7rem;
+      margin: 0;
+    }
+
+    .letter-content-inner {
+      padding-right: 10rem;
+    }
+
+    .letter-grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .letter-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ========================================
+  Uygulama-7: MOBIL VARSAYILAN (0 - 639px)
+  ======================================== */
+
+  /* Genel sifirlama */
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Section'lar arasi bosluk */
+  section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  /* Section basliklari */
+  section h2 {
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  /* Hakkimda: tek sutun , ortalanmis */
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .about-content figure {
+    max-width: 200px;
+  }
+
+  .about-content img {
+    border-radius: var(--radius-full);
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  /* Iletisim formu */
+  .form-group {
+    margin-bottom: var(--space-md);
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: var(--text-base);
+    transition: border-color var(--transition-fast);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus {
+    background: var(--color-secondary);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: var(--space-xl) var(--space-md);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* ========================================
+  TABLET (640px ve uzeri)
+  ======================================== */
+  @media (min-width: 640px) {
+    section {
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    /* Hakkimda: yatay duzen */
+    .about-content {
+      flex-direction: row;
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .about-content figure {
+      flex-shrink: 0;
+    }
+
+    /* Form butonu tam genislik olmaktan cikar */
+    button[type="submit"] {
+      width: auto;
+    }
+  }
+
+  /* ========================================
+  MASAUSTU (1024px ve uzeri)
+  ======================================== */
+  @media (min-width: 1024px) {
+
+    /* Icerik genisligi sinirla */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: var(--space-3xl) var(--space-xl);
+    }
+
+    /* Proje kartlari en az 3 sutun */
+    .project-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   .backdrop-blur-sm {
     --tw-backdrop-blur: blur(var(--blur-sm));
     -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
@@ -1732,19 +2206,19 @@
     outline-style: none;
   }
 
-  @media (width >= 48rem) {
+  @media (width >=48rem) {
     .md\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (width >= 64rem) {
+  @media (width >=64rem) {
     .lg\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (width >= 64rem) {
+  @media (width >=64rem) {
     .lg\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

@@ -109,10 +109,10 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <div>
-            <h1 className="text-5xl mb-4 text-white drop-shadow-2xl">
+            <h1 className="text-5xl mb-4 text-gray-900 drop-shadow-md">
               Projelerim
             </h1>
-            <p className="text-white/90 text-xl drop-shadow">Geliştirdiğim bazı projeler ve uygulamalar</p>
+            <p className="text-gray-800 text-xl font-medium drop-shadow-sm">Geliştirdiğim bazı projeler ve uygulamalar</p>
           </div>
 
           <motion.button
@@ -130,7 +130,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
 
         {/* Projects Grid */}
         <motion.section
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="project-grid"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
@@ -138,7 +138,7 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
           {projects.map((project, index) => (
             <motion.article
               key={project.id}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="project-card"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 * index, duration: 0.6 }}
@@ -153,22 +153,17 @@ export function ProjectsPage({ onBack }: ProjectsPageProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              <div className="p-6">
-                <h2 className="text-xl mb-3 text-gray-900">{project.title}</h2>
-                <p className="text-gray-700 mb-4 leading-relaxed">{project.description}</p>
+              <div className="p-6 flex flex-col flex-1">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <ul className="skill-tags" role="list" aria-label="Kullanılan Teknolojiler">
                   {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-white/60 text-blue-700 rounded-full text-sm backdrop-blur-sm"
-                    >
-                      {tech}
-                    </span>
+                    <li key={tech}>{tech}</li>
                   ))}
-                </div>
+                </ul>
 
-                <div className="flex space-x-3">
+                <div className="flex space-x-3 mt-4">
                   <motion.a
                     href={project.github}
                     className="flex-1 bg-white/90 text-gray-900 py-2 px-4 rounded-lg text-center hover:bg-white/100 transition-colors backdrop-blur-sm"
