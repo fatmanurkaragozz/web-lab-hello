@@ -109,15 +109,10 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
               }}
             >
               <motion.div
-                className="bg-white rounded-2xl shadow-2xl p-10 max-w-4xl border-2 border-gray-200 relative overflow-hidden"
+                className="bg-white rounded-2xl shadow-2xl border-2 border-gray-200 relative letter-wrapper"
                 initial={{ rotateX: -20 }}
                 animate={{ rotateX: 0 }}
                 transition={{ delay: 1.8, duration: 1.2 }}
-                style={{
-                  background: "linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)",
-                  width: "900px",
-                  minHeight: "500px" // Yükseklik biraz azaltıldı
-                }}
               >
                 {/* Kağıt dokusu */}
                 <div className="absolute inset-0 opacity-20">
@@ -127,9 +122,9 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
                   <div className="absolute top-24 left-8 w-full h-1 bg-gradient-to-r from-blue-100 to-transparent"></div>
                 </div>
 
-                {/* Profil fotoğrafı alanı - sağ üst köşe */}
+                {/* Profil fotoğrafı alanı - sağ üst köşe (Sadece Masaustu) */}
                 <motion.div
-                  className="absolute top-8 right-8 z-30"
+                  className="profile-desktop"
                   initial={{ scale: 0, rotate: 180 }}
                   animate={showContent ? { scale: 1, rotate: 0 } : {}}
                   transition={{ delay: 2.5, duration: 0.8, ease: "easeOut" }}
@@ -154,24 +149,35 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
                       animate={showContent ? { opacity: 1, y: 0 } : {}}
                       transition={{ delay: 3, duration: 0.6 }}
                     >
-                      <span className="text-sm text-gray-700 font-medium">Fatma Nur Karagöz - 230541018</span>
+                      <span className="text-sm text-gray-700 font-medium">Fatma Nur Karagöz</span>
                     </motion.figcaption>
                   </figure>
                 </motion.div>
 
-                <div className="relative z-10 pr-40">
+                <div className="relative z-10 letter-content-inner">
                   <motion.header
-                    className="mb-6"
+                    className="letter-header"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 2, duration: 0.8 }}
                   >
-                    <h1 className="text-4xl mb-3 text-gray-800">Merhaba! 👋</h1>
-                    <div className="w-28 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                    {/* Mobil İçin Profil Fotoğrafı ve İsmi */}
+                    <div className="profile-mobile">
+                      <ImageWithFallback
+                        src="/public/ppp.jpeg"
+                        alt="Fatma Nur Karagöz'ün vesikalığı"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="profile-mobile-name">
+                      <span>Fatma Nur Karagöz</span>
+                    </div>
+                    <h1 className="text-3xl font-bold mb-3 text-gray-800">Merhaba! 👋</h1>
+                    <div className="letter-header-line"></div>
                   </motion.header>
 
                   <motion.div
-                    className="grid grid-cols-2 gap-5 mb-6"
+                    className="letter-grid-2"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 2.3, duration: 0.8 }}
@@ -257,7 +263,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
                   {/* Navigasyon Butonları */}
                   <motion.nav
                     aria-label="Ana navigasyon"
-                    className="grid grid-cols-3 gap-4 mt-6"
+                    className="letter-grid-3"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 3, duration: 0.8 }}

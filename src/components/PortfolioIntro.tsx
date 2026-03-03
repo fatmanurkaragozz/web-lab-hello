@@ -46,7 +46,7 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
   }, []);
 
   return (
-    <main className="relative w-full h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 overflow-hidden">
+    <div role="main" className="relative w-full h-screen bg-gradient-to-b from-sky-400 via-sky-300 to-sky-100 overflow-hidden">
       {/* Arka plan - bulutlar */}
       <div className="absolute inset-0">
         <motion.div
@@ -189,44 +189,18 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
         </div>
       )}
 
-      {/* Devam butonu */}
-      {animationStage === 'completed' && (
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-        >
-          <motion.button
-            className="px-10 py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl shadow-2xl hover:from-blue-700 hover:to-purple-700 transition-all text-lg"
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onNavigate('projects')}
-          >
-            <span className="flex items-center space-x-3">
-              <span>Portföyümü İncele</span>
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-xl"
-              >
-                🚀
-              </motion.span>
-            </span>
-          </motion.button>
-        </motion.div>
-      )}
+
 
       {/* Başlık (animasyon tamamlandıktan sonra) */}
       {animationStage === 'completed' && (
         <motion.div
-          className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center z-50"
+          className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center w-full px-4 z-50"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5 }}
         >
           <motion.h1
-            className="text-5xl text-white mb-3 drop-shadow-2xl"
+            className="intro-title font-bold text-white mb-3 drop-shadow-2xl"
             animate={{
               textShadow: [
                 "0 0 15px rgba(255,255,255,0.5)",
@@ -297,6 +271,6 @@ export function PortfolioIntro({ onNavigate }: PortfolioIntroProps) {
           transition={{ delay: 1.5, duration: 1 }}
         />
       )}
-    </main>
+    </div>
   );
 }
