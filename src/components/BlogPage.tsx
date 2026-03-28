@@ -1,10 +1,16 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
+import Card from './Card';
+import Button from './Button';
+import PageBackground from './PageBackground';
+import ThemeToggle from './ThemeToggle';
 
 interface BlogPageProps {
   onBack: () => void;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
-export function BlogPage({ onBack }: BlogPageProps) {
+export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) {
   const articles = [
     {
       id: 1,
@@ -41,37 +47,43 @@ export function BlogPage({ onBack }: BlogPageProps) {
 
   return (
     <motion.main
-      className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-8"
+      className="relative min-h-screen p-4 md:p-8 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="max-w-6xl mx-auto">
+      <PageBackground isDarkMode={isDarkMode} />
+      
+      {/* Üst Navigasyon - Geri Dön Butonu */}
+      <div className="fixed top-6 left-24 z-[110]">
+        <Button
+          variant="ghost"
+          onClick={onBack}
+          className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-md dark:text-white border border-white/20 px-6 h-14"
+        >
+          ← Geri Dön
+        </Button>
+      </div>
+
+      {/* Global Tema Butonu (Component içinde fixed top-6 left-6) */}
+      <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+
+      <div className="relative max-w-7xl mx-auto z-10 pt-44">
         {/* Header */}
-        <motion.header
-          className="flex items-center justify-between mb-12"
+        <motion.header 
+          className="mb-12"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <div>
-            <h1 className="text-5xl mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Medium Yazılarım
+            <h1 className="text-3xl md:text-5xl font-black italic uppercase mb-4 text-slate-900 dark:text-white tracking-widest">
+              Yazılarım
             </h1>
-            <p className="text-gray-600 text-xl">Teknoloji, geliştirme ve deneyimler üzerine yazılarım</p>
+            <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg font-medium max-w-2xl border-l-4 border-green-500 pl-4">
+              Teknoloji, yazılım ve tasarım üzerine düşüncelerimi paylaştığım Medium yazılarım.
+            </p>
           </div>
-
-          <motion.button
-            onClick={onBack}
-            className="bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="flex items-center space-x-2">
-              <span>←</span>
-              <span>Geri Dön</span>
-            </span>
-          </motion.button>
         </motion.header>
 
         {/* Articles Grid */}
@@ -82,59 +94,45 @@ export function BlogPage({ onBack }: BlogPageProps) {
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           {articles.map((article, index) => (
-            <motion.article
+            <Card
               key={article.id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1 * index, duration: 0.6 }}
-              whileHover={{ y: -5 }}
+              title={article.title}
+              image={article.image}
+              imageAlt={article.title}
+              variant="elevated"
+              className="group cursor-pointer"
+              footer={
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full text-blue-600 hover:text-blue-700 justify-between group-hover:bg-blue-50 transition-colors"
+                  onClick={() => window.open(article.url, '_blank')}
+                >
+                  <span>Devamını Oku</span>
+                  <span>→</span>
+                </Button>
+              }
             >
-              <div className="relative overflow-hidden">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
-                />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                  <span className="text-sm text-gray-600">{article.readTime}</span>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between text-xs text-gray-500 font-medium tracking-wide">
+                  <span>{article.date}</span>
+                  <span className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">{article.readTime}</span>
                 </div>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center space-x-2 mb-3">
-                  <span className="text-sm text-gray-500">{article.date}</span>
-                </div>
-
-                <h2 className="text-xl mb-3 text-gray-800 leading-tight hover:text-blue-600 transition-colors">
-                  {article.title}
-                </h2>
-
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
                   {article.excerpt}
                 </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm"
+                      className="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-[10px] font-bold rounded uppercase tracking-wider border border-green-100 dark:border-green-800"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-
-                <motion.a
-                  href={article.url}
-                  className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
-                  whileHover={{ x: 5 }}
-                >
-                  <span>Devamını Oku</span>
-                  <span>→</span>
-                </motion.a>
               </div>
-            </motion.article>
+            </Card>
           ))}
         </motion.section>
 
@@ -145,16 +143,16 @@ export function BlogPage({ onBack }: BlogPageProps) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <motion.a
-            href="#"
-            className="inline-flex items-center space-x-3 bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          <Button
+            variant="primary"
+            size="lg"
+            className="shadow-xl px-12 py-6 rounded-2xl"
+            onClick={() => window.open('https://medium.com/@fatmaNurK', '_blank')}
           >
-            <span className="text-xl">📝</span>
+            <span className="text-xl mr-3">📝</span>
             <span>Medium Profilimi Ziyaret Et</span>
-            <span>→</span>
-          </motion.a>
+            <span className="ml-3">→</span>
+          </Button>
         </motion.div>
       </div>
     </motion.main>

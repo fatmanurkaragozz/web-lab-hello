@@ -1,11 +1,17 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
+import PageBackground from './PageBackground';
+import ThemeToggle from './ThemeToggle';
 
 interface ContactPageProps {
   onBack: () => void;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
-export function ContactPage({ onBack }: ContactPageProps) {
+export function ContactPage({ onBack, isDarkMode, toggleDarkMode }: ContactPageProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +28,6 @@ export function ContactPage({ onBack }: ContactPageProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form gönderme işlemi burada yapılacak
     console.log('Form gönderildi:', formData);
   };
 
@@ -42,7 +47,7 @@ export function ContactPage({ onBack }: ContactPageProps) {
     {
       icon: "📍",
       title: "Konum",
-      value: "  Ankara, Türkiye",
+      value: "Ankara, Türkiye",
       link: "#"
     },
     {
@@ -81,207 +86,171 @@ export function ContactPage({ onBack }: ContactPageProps) {
   ];
 
   return (
-    <motion.main
-      className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 p-8"
+    <motion.main 
+      className="relative min-h-screen p-4 md:p-8 flex flex-col items-center pt-44 pb-20 overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
     >
-      <div className="max-w-6xl mx-auto">
+      <PageBackground isDarkMode={isDarkMode} />
+
+      {/* Üst Navigasyon - Geri Dön Butonu */}
+      <div className="fixed top-6 left-24 z-20">
+        <Button
+          variant="ghost"
+          onClick={onBack}
+          className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-md dark:text-white border border-white/20 px-6 h-14"
+        >
+          ← Geri Dön
+        </Button>
+      </div>
+
+      {/* Global Tema Butonu (Component içinde fixed top-6 left-6 olarak tanımlı) */}
+      <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+
+      <div className="relative max-w-7xl mx-auto z-10 pt-44">
         {/* Header */}
         <motion.header
-          className="flex items-center justify-between mb-12"
+          className="mb-12 text-center lg:text-left"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <div>
-            <h1 className="text-5xl mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-5xl font-black italic uppercase mb-4 tracking-widest">
+            <span className={isDarkMode ? 'text-white' : 'text-slate-900'}>
               İletişime Geç
-            </h1>
-            <p className="text-gray-600 text-xl">Projeleriniz için benimle iletişime geçebilirsiniz</p>
-          </div>
-
-          <motion.button
-            onClick={onBack}
-            className="bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="flex items-center space-x-2">
-              <span>←</span>
-              <span>Geri Dön</span>
             </span>
-          </motion.button>
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg font-medium border-l-4 border-purple-500 pl-4 inline-block">
+            Projeleriniz için benimle iletişime geçebilirsiniz
+          </p>
         </motion.header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <motion.section
-            className="bg-white rounded-2xl shadow-xl p-8"
+            className="bg-white dark:bg-gray-800/50 rounded-2xl shadow-xl p-6 md:p-8 backdrop-blur-sm border border-white/10"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            <h2 className="text-2xl mb-6 text-gray-800">Mesaj Gönder</h2>
+            <h2 className="text-2xl mb-6 font-bold text-gray-800 dark:text-white">Mesaj Gönder</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-              <fieldset className="border border-gray-200 rounded-xl p-6">
-                <legend className="text-xl px-2 text-gray-800 font-medium">İletişim Formu</legend>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  id="name"
+                  label="Ad Soyad"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Adınız ve Soyadınız"
+                  required
+                />
+                <Input
+                  id="email"
+                  type="email"
+                  label="E-posta"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="E-posta adresiniz"
+                  required
+                />
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                  <div className="form-group">
-                    <label htmlFor="name" className="block text-gray-700 mb-2">Ad Soyad:</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
-                      placeholder="Adınız ve Soyadınız"
-                      required
-                      minLength={2}
-                      aria-describedby="name-error"
-                    />
-                    <small id="name-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="email" className="block text-gray-700 mb-2">E-posta:</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors"
-                      placeholder="E-posta adresiniz"
-                      required
-                      aria-describedby="email-error"
-                    />
-                    <small id="email-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
-                  </div>
-                </div>
-
-                <div className="form-group mt-6">
-                  <label htmlFor="subject" className="block text-gray-700 mb-2">Konu:</label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors bg-white"
-                    required
-                    aria-describedby="subject-error"
-                  >
-                    <option value="">-- Seçiniz --</option>
-                    <option value="is">İş Teklifi</option>
-                    <option value="soru">Soru</option>
-                    <option value="oneri">Öneri</option>
-                  </select>
-                  <small id="subject-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
-                </div>
-
-                <div className="form-group mt-6">
-                  <label htmlFor="message" className="block text-gray-700 mb-2">Mesajınız:</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-500 transition-colors resize-none"
-                    placeholder="Mesajınızı buraya yazın..."
-                    required
-                    minLength={10}
-                    aria-describedby="message-error"
-                  />
-                  <small id="message-error" className="text-red-500 text-sm mt-1 block h-5" role="alert"></small>
-                </div>
-
-                <motion.button
-                  type="submit"
-                  className="w-full mt-8 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all font-medium text-lg"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+              <div className="space-y-1.5">
+                <label htmlFor="subject" className="text-sm font-medium text-gray-700 dark:text-gray-300">Konu</label>
+                <select
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-gray-900 dark:text-white"
+                  required
                 >
-                  <span className="flex items-center justify-center space-x-2">
-                    <span>Gönder</span>
-                    <span>📨</span>
-                  </span>
-                </motion.button>
-              </fieldset>
+                  <option value="">-- Seçiniz --</option>
+                  <option value="is">İş Teklifi</option>
+                  <option value="soru">Soru</option>
+                  <option value="oneri">Öneri</option>
+                </select>
+              </div>
+
+              <div className="space-y-1.5">
+                <label htmlFor="message" className="text-sm font-medium text-gray-700 dark:text-gray-300">Mesajınız</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all resize-none text-gray-900 dark:text-white"
+                  placeholder="Mesajınızı buraya yazın..."
+                  required
+                />
+              </div>
+
+              <Button
+                variant="primary"
+                type="submit"
+                className="w-full py-4 text-lg font-bold shadow-lg"
+              >
+                Gönder 📨
+              </Button>
             </form>
           </motion.section>
 
-          {/* Contact Info */}
-          <motion.div
-            className="space-y-8"
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-          >
-            {/* Contact Details */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl mb-6 text-gray-800">İletişim Bilgileri</h2>
-
+          {/* Contact Info & Socials */}
+          <div className="space-y-8">
+            <motion.div
+              className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/10"
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <h2 className="text-2xl mb-6 font-bold text-gray-800 dark:text-white">İletişim Bilgileri</h2>
               <div className="space-y-4">
                 {contacts.map((contact, index) => (
                   <motion.a
                     key={contact.title}
                     href={contact.link}
-                    className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors"
+                    className="flex items-center space-x-4 p-4 rounded-xl hover:bg-white dark:hover:bg-gray-700 transition-colors group"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-                    whileHover={{ x: 5 }}
                   >
-                    <span className="text-2xl">{contact.icon}</span>
+                    <span className="text-2xl group-hover:scale-125 transition-transform">{contact.icon}</span>
                     <div>
-                      <p className="font-medium text-gray-800">{contact.title}</p>
-                      <p className="text-gray-600">{contact.value}</p>
+                      <p className="font-bold text-gray-900 dark:text-white">{contact.title}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{contact.value}</p>
                     </div>
                   </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            {/* Social Links */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl mb-6 text-gray-800">Sosyal Medya</h2>
-
+            <motion.div
+              className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/10"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+            >
+              <h2 className="text-2xl mb-6 font-bold text-gray-800 dark:text-white">Sosyal Medya</h2>
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.name}
                     href={social.url}
-                    className={`bg-gradient-to-r ${social.color} text-white p-4 rounded-xl text-center hover:shadow-lg transition-all`}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
+                    className={`bg-gradient-to-r ${social.color} text-white p-4 rounded-xl flex flex-col items-center justify-center hover:shadow-lg transition-all`}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="text-2xl mb-2">{social.icon}</div>
-                    <p className="font-medium">{social.name}</p>
+                    <span className="text-3xl mb-2">{social.icon}</span>
+                    <span className="font-bold text-sm tracking-wide uppercase">{social.name}</span>
                   </motion.a>
                 ))}
               </div>
-            </div>
-
-            {/* Availability */}
-            <motion.div
-              className="bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-2xl shadow-xl p-8 text-center"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.4, duration: 0.8 }}
-            >
-              <div className="text-3xl mb-4">✅</div>
-              <h3 className="text-xl mb-2">Yeni Projeler İçin Uygunum</h3>
-              <p className="opacity-90">Freelance projeleri ve iş birliği fırsatları için açığım</p>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.main>
