@@ -1,14 +1,16 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import Button from './Button';
 
 interface LetterProps {
   isOpen: boolean;
   onAnimationComplete?: () => void;
   onNavigate?: (page: string) => void;
+  isDarkMode: boolean;
 }
 
-export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps) {
+export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: LetterProps) {
   const [showContent, setShowContent] = useState(false);
 
   const handleNavigation = (page: string) => {
@@ -85,10 +87,10 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
             </svg>
           </motion.div>
 
-          {/* Çıkan kağıt - pozisyon yukarı taşındı */}
+          {/* Çıkan kağıt */}
           {isOpen && (
             <motion.div
-              className="absolute left-1/2 transform -translate-x-1/2 z-20"
+              className="absolute left-1/2 transform -translate-x-1/2 z-20 w-[90vw] max-w-5xl"
               initial={{
                 y: 60,
                 opacity: 0,
@@ -96,7 +98,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
                 clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"
               }}
               animate={{
-                y: -330, // Sayfanın altına yapışmaması için daha yukarı taşındı
+                y: -350, // Başlık ve arka planın daha iyi görünmesi için mesafe azaltıldı
                 opacity: 1,
                 scale: 1,
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
@@ -109,200 +111,171 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate }: LetterProps)
               }}
             >
               <motion.div
-                className="bg-white rounded-2xl shadow-2xl border-2 border-gray-200 relative letter-wrapper"
+                className="bg-white dark:bg-slate-950 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-800 relative letter-wrapper w-full mx-auto overflow-y-auto max-h-[85vh] scrollbar-thin scrollbar-thumb-gray-200"
                 initial={{ rotateX: -20 }}
                 animate={{ rotateX: 0 }}
                 transition={{ delay: 1.8, duration: 1.2 }}
               >
                 {/* Kağıt dokusu */}
-                <div className="absolute inset-0 opacity-20">
+                <div className={`absolute inset-0 opacity-20 ${isDarkMode ? 'hidden' : 'block'}`}>
                   <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
                   <div className="absolute top-8 left-8 w-full h-1 bg-gradient-to-r from-blue-100 to-transparent"></div>
                   <div className="absolute top-16 left-8 w-full h-1 bg-gradient-to-r from-blue-100 to-transparent"></div>
                   <div className="absolute top-24 left-8 w-full h-1 bg-gradient-to-r from-blue-100 to-transparent"></div>
                 </div>
 
-                {/* Profil fotoğrafı alanı - sağ üst köşe (Sadece Masaustu) */}
+                {/* Profil fotoğrafı alanı - Sağ Üst Köşe (Tek Görsel) */}
                 <motion.div
-                  className="profile-desktop"
+                  className="absolute top-8 right-8 z-30"
                   initial={{ scale: 0, rotate: 180 }}
                   animate={showContent ? { scale: 1, rotate: 0 } : {}}
                   transition={{ delay: 2.5, duration: 0.8, ease: "easeOut" }}
                 >
                   <figure className="relative m-0">
-                    <div className="w-32 h-32 rounded-2xl overflow-hidden border-4 border-white shadow-xl relative z-10">
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl relative z-10">
                       <ImageWithFallback
-                        src="/public/ppp.jpeg"
+                        src="/ppp.jpeg"
                         alt="Fatma Nur Karagöz'ün vesikalığı"
                         className="w-full h-full object-cover"
                       />
                     </div>
 
                     {/* Fotoğraf çerçevesi efekti */}
-                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl opacity-20 blur-md"></div>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-300 to-purple-400 rounded-2xl opacity-30 blur-sm"></div>
-
-                    {/* Fotoğraf altına isim etiketi */}
-                    <motion.figcaption
-                      className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white px-4 py-1 rounded-full shadow-lg border border-gray-200 z-20 whitespace-nowrap"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={showContent ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 3, duration: 0.6 }}
-                    >
-                      <span className="text-sm text-gray-700 font-medium">Fatma Nur Karagöz</span>
-                    </motion.figcaption>
+                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl opacity-20 dark:opacity-40 blur-md"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-300 to-purple-400 rounded-2xl opacity-30 dark:opacity-50 blur-sm"></div>
                   </figure>
                 </motion.div>
 
-                <div className="relative z-10 letter-content-inner">
+                <div className="relative z-10 letter-content-inner px-6 pb-16 pt-8 md:px-10 md:pb-20">
                   <motion.header
-                    className="letter-header"
+                    className="mb-8 pr-12 md:pr-40"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 2, duration: 0.8 }}
                   >
-                    {/* Mobil İçin Profil Fotoğrafı ve İsmi */}
-                    <div className="profile-mobile">
-                      <ImageWithFallback
-                        src="/public/ppp.jpeg"
-                        alt="Fatma Nur Karagöz'ün vesikalığı"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="profile-mobile-name">
-                      <span>Fatma Nur Karagöz</span>
-                    </div>
-                    <h1 className="text-3xl font-bold mb-3 text-gray-800">Merhaba! 👋</h1>
-                    <div className="letter-header-line"></div>
+                    <h1 className="text-2xl md:text-4xl font-black italic uppercase tracking-tighter mb-3 text-gray-800 dark:text-white leading-tight">
+                      Merhaba!<br />
+                      <span className="text-blue-600 dark:text-blue-400">Ben Fatma Nur Karagöz 👋</span>
+                    </h1>
+                    <div className="w-16 h-1.5 bg-blue-500 rounded-full"></div>
                   </motion.header>
 
                   <motion.div
-                    className="letter-grid-2"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 2.3, duration: 0.8 }}
                   >
+                    {/* Bilgi Kartları */}
                     <div className="space-y-4">
-                      <div className="flex items-center space-x-3 p-3 rounded-xl bg-blue-50 border border-blue-100">
-                        <span className="w-3 h-3 bg-blue-500 rounded-full flex-shrink-0"></span>
+                      <div className="flex items-center space-x-4 p-4 rounded-xl bg-blue-50/50 dark:bg-slate-900/50 border border-blue-100/50 dark:border-slate-800 hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white text-lg shadow-sm">💼</div>
                         <div>
-                          <p className="text-gray-700">
-                            <strong>Mesleğim:</strong><br />
-                            Full Stack Developer
-                          </p>
+                          <p className="text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Mesleğim</p>
+                          <p className="text-gray-900 dark:text-white font-medium">Full Stack Developer</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-3 p-3 rounded-xl bg-green-50 border border-green-100">
-                        <span className="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+                      <div className="flex items-center space-x-4 p-4 rounded-xl bg-green-50/50 dark:bg-slate-900/50 border border-green-100/50 dark:border-slate-800 hover:bg-green-50 dark:hover:bg-slate-800 transition-colors">
+                        <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white text-lg shadow-sm">📍</div>
                         <div>
-                          <p className="text-gray-700">
-                            <strong>Konum:</strong><br />
-                            Türkiye, Ankara
-                          </p>
+                          <p className="text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Konum</p>
+                          <p className="text-gray-900 dark:text-white font-medium">Türkiye, Ankara</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-3 p-3 rounded-xl bg-purple-50 border border-purple-100">
-                        <span className="w-3 h-3 bg-purple-500 rounded-full flex-shrink-0"></span>
+                      <div className="flex items-center space-x-4 p-4 rounded-xl bg-purple-50/50 dark:bg-slate-900/50 border border-purple-100/50 dark:border-slate-800 hover:bg-purple-50 dark:hover:bg-slate-800 transition-colors">
+                        <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white text-lg shadow-sm">⏳</div>
                         <div>
-                          <p className="text-gray-700">
-                            <strong>Deneyim:</strong><br />
-                            5+ Yıl Profesyonel
-                          </p>
+                          <p className="text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Deneyim</p>
+                          <p className="text-gray-900 dark:text-white font-medium">2+ Yıldır Uğraşıyorum</p>
                         </div>
                       </div>
                     </div>
 
-                    <section className="space-y-3">
-                      <div className="bg-gray-50 p-4 rounded-xl border-l-4 border-blue-400">
-                        <h2 className="text-gray-800 mb-3">Uzmanlık Alanlarım</h2>
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">React & Next.js</span>
+                    {/* Uzmanlık Alanları */}
+                    <section className="bg-gray-50/50 dark:bg-slate-900/50 p-6 rounded-xl border border-gray-100 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                      <h2 className="text-gray-900 dark:text-white font-bold mb-4 flex items-center gap-2">
+                        <span className="w-1.5 h-6 bg-blue-500 rounded-full"></span>
+                        Uzmanlık Alanlarım
+                      </h2>
+                      <div className="grid grid-cols-2 gap-3">
+                        {["React & Next.js", "TypeScript", "Node.js", "UI/UX Design", "PostgreSQL", "Tailwind CSS"].map((skill) => (
+                          <div key={skill} className="flex items-center space-x-2 text-sm text-gray-700 dark:text-slate-300">
+                            <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
+                            <span>{skill}</span>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">TypeScript</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">Node.js</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">UI/UX Design</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">Database Management</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className="w-2 h-2 bg-red-400 rounded-full"></span>
-                            <span className="text-gray-700 text-sm">Mobile Development</span>
-                          </div>
-                        </div>
+                        ))}
                       </div>
+                    </section>
+
+                    {/* Hakkımda Kısa Özeti */}
+                    <section className="bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:to-slate-800 p-6 rounded-xl border border-blue-50 dark:border-slate-800 hover:from-blue-50/50 hover:to-purple-50/50 transition-all">
+                      <h2 className="text-gray-900 dark:text-white font-bold mb-4">Hakkımda</h2>
+                      <p className="text-gray-600 dark:text-slate-300 text-sm leading-relaxed">
+                        Yazılım Mühendisliği öğrencisiyim. Modern web teknolojileri ile kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar geliştiriyorum.
+                      </p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-xs text-gray-500 dark:text-slate-400 flex items-center gap-2">📚 Kitap Okumak</li>
+                        <li className="text-xs text-gray-500 dark:text-slate-400 flex items-center gap-2">🏔️ Doğa Yürüyüşü</li>
+                        <li className="text-xs text-gray-500 dark:text-slate-400 flex items-center gap-2">☕ Kahve Deneyleri</li>
+                      </ul>
                     </section>
                   </motion.div>
 
-                  <motion.section
-                    className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-gray-200 mb-6"
+                  <motion.div
+                    className="my-8"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 2.6, duration: 0.8 }}
                   >
-                    <h2 className="text-gray-800 mb-3">Hakkımda</h2>
-                    <p className="text-gray-700 leading-relaxed">
-                      Yazılım Mühendisliği öğrencisiyim. Kitap okumayı, doğa yürüyüşü yapmayı ve kahve içmeyi çok seviyorum. Modern web teknolojileri ile kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar geliştiriyorum.
-                      Yaratıcılık ve teknolojiyi birleştirerek kullanıcı deneyimini ön planda tutan çözümler üretmeyi seviyorum.
-                    </p>
-                  </motion.section>
+                    <div className="letter-header-line mb-6"></div>
+                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-4">Şimdi Göz At</p>
+                  </motion.div>
 
                   {/* Navigasyon Butonları */}
                   <motion.nav
                     aria-label="Ana navigasyon"
-                    className="letter-grid-3"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-4"
                     initial={{ y: 30, opacity: 0 }}
                     animate={showContent ? { y: 0, opacity: 1 } : {}}
                     transition={{ delay: 3, duration: 0.8 }}
                   >
-                    <motion.button
+                    <Button
+                      variant="primary"
                       onClick={() => handleNavigation('projects')}
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-xl shadow-lg hover:from-blue-600 hover:to-blue-700 transition-all"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="group relative overflow-hidden !py-6 flex flex-col items-center justify-center gap-2"
                     >
-                      <div className="text-center">
-                        <div className="text-2xl mb-2">🚀</div>
-                        <p className="font-medium">Projelerim</p>
-                      </div>
-                    </motion.button>
+                      <span className="text-2xl group-hover:scale-125 transition-transform duration-300">🚀</span>
+                      <span className="font-bold tracking-tight">Projelerim</span>
+                    </Button>
 
-                    <motion.button
+                    <Button
+                      variant="secondary"
                       onClick={() => handleNavigation('blog')}
-                      className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-xl shadow-lg hover:from-green-600 hover:to-green-700 transition-all"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="group relative overflow-hidden !py-6 flex flex-col items-center justify-center gap-2"
                     >
-                      <div className="text-center">
-                        <div className="text-2xl mb-2">📝</div>
-                        <p className="font-medium">Medium Yazılarım</p>
-                      </div>
-                    </motion.button>
+                      <span className="text-2xl group-hover:scale-125 transition-transform duration-300">📝</span>
+                      <span className="font-bold tracking-tight">Medium</span>
+                    </Button>
 
-                    <motion.button
+                    <Button
+                      variant="ghost"
                       onClick={() => handleNavigation('contact')}
-                      className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-xl shadow-lg hover:from-purple-600 hover:to-purple-700 transition-all"
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="group relative overflow-hidden !py-6 flex flex-col items-center justify-center gap-2 border border-blue-100 hover:border-blue-200"
                     >
-                      <div className="text-center">
-                        <div className="text-2xl mb-2">💬</div>
-                        <p className="font-medium">İletişime Geç</p>
-                      </div>
-                    </motion.button>
+                      <span className="text-2xl group-hover:scale-125 transition-transform duration-300">💬</span>
+                      <span className="font-bold tracking-tight">İletişim</span>
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleNavigation('uikit')}
+                      className="group relative overflow-hidden !py-6 flex flex-col items-center justify-center gap-2 border border-purple-100 hover:border-purple-200"
+                    >
+                      <span className="text-2xl group-hover:scale-125 transition-transform duration-300">🎨</span>
+                      <span className="font-bold tracking-tight">UI Kit</span>
+                    </Button>
                   </motion.nav>
                 </div>
 

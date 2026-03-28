@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PortfolioIntro } from "./components/PortfolioIntro";
 import { ProjectsPage } from "./components/ProjectsPage";
 import { BlogPage } from "./components/BlogPage";
 import { ContactPage } from "./components/ContactPage";
+import { UiKitPage } from "./components/UiKitPage";
 
-type Page = "intro" | "projects" | "blog" | "contact";
+type Page = "intro" | "projects" | "blog" | "contact" | "uikit";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("intro");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Tema değişikliğini HTML elementine yansıt
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page as Page);
@@ -18,15 +31,19 @@ export default function App() {
   };
 
   const renderPage = () => {
+    const props = { isDarkMode, toggleDarkMode, onBack: handleBack };
+    
     switch (currentPage) {
       case "projects":
-        return <ProjectsPage onBack={handleBack} />;
+        return <ProjectsPage {...props} />;
       case "blog":
-        return <BlogPage onBack={handleBack} />;
+        return <BlogPage {...props} />;
       case "contact":
-        return <ContactPage onBack={handleBack} />;
+        return <ContactPage {...props} />;
+      case "uikit":
+        return <UiKitPage {...props} />;
       default:
-        return <PortfolioIntro onNavigate={handleNavigate} />;
+        return <PortfolioIntro onNavigate={handleNavigate} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
     }
   };
 
