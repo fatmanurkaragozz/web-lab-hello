@@ -155,7 +155,10 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: 
                   >
                     <h1 className="text-2xl md:text-4xl font-black italic uppercase tracking-tighter mb-3 text-gray-800 dark:text-white leading-tight">
                       Merhaba!<br />
-                      <span className="text-blue-600 dark:text-blue-400">Ben Fatma Nur Karagöz 👋</span>
+                      <span className="text-blue-600 dark:text-blue-400">
+                        <span className="inline-block">Ben Fatma Nur</span>{' '}
+                        <span className="inline-block">Karagöz 👋</span>
+                      </span>
                     </h1>
                     <div className="w-16 h-1.5 bg-blue-500 rounded-full"></div>
                   </motion.header>

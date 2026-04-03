@@ -9,9 +9,11 @@ interface PortfolioIntroProps {
   onNavigate: (page: string) => void;
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  /** Animasyon tamamlandığında (stage: 'completed') çağrılır */
+  onComplete?: () => void;
 }
 
-export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode }: PortfolioIntroProps) {
+export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode, onComplete }: PortfolioIntroProps) {
   const [animationStage, setAnimationStage] = useState<'initial' | 'flying' | 'crashed' | 'letterFalling' | 'letterOpen' | 'completed'>('initial');
   const [isAirplaneShaking, setIsAirplaneShaking] = useState(false);
 
@@ -37,7 +39,12 @@ export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode }: Portf
 
     const timer5 = setTimeout(() => {
       setAnimationStage('completed');
-    }, 15000);
+    }, 7000);
+
+    // Animasyon tamamlandığında (mektup açılırken) LandingPage'e geçiş
+    const timer6 = setTimeout(() => {
+      onComplete?.();
+    }, 7500);
 
     return () => {
       clearTimeout(timer1);
@@ -45,6 +52,7 @@ export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode }: Portf
       clearTimeout(timer3);
       clearTimeout(timer4);
       clearTimeout(timer5);
+      clearTimeout(timer6);
     };
   }, []);
 
