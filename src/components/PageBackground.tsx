@@ -19,7 +19,7 @@ export default function PageBackground({ isDarkMode }: PageBackgroundProps) {
 
       {/* Güneş / Ay */}
       <motion.div
-        className="absolute top-12 right-12 rounded-full z-0"
+        className="absolute top-24 right-12 rounded-full z-0"
         initial={false}
         animate={isDarkMode ? {
           width: 48,

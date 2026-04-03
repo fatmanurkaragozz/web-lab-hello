@@ -3,16 +3,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface ThemeToggleProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  /** 'fixed': sol üstte sabit (default) | 'inline': normal akış, header içi kullanım */
+  variant?: 'fixed' | 'inline';
 }
 
-export default function ThemeToggle({ isDarkMode, toggleDarkMode }: ThemeToggleProps) {
+export default function ThemeToggle({ isDarkMode, toggleDarkMode, variant = 'fixed' }: ThemeToggleProps) {
+  const positionClass = variant === 'inline'
+    ? 'relative z-auto'      // header içinde normal akış
+    : 'fixed top-6 left-6 z-[100]'; // eski davranış — intro sayfasında
+
   return (
     <button
       onClick={toggleDarkMode}
       className={`
-        fixed top-6 left-6 z-[100]
-        w-14 h-14 rounded-full transition-all duration-500
-        flex items-center justify-center shadow-2xl border backdrop-blur-xl
+        ${positionClass}
+        w-11 h-11 rounded-full transition-all duration-500
+        flex items-center justify-center shadow-lg border backdrop-blur-xl
         ${isDarkMode 
           ? 'bg-slate-900/40 border-slate-700/50 text-indigo-300' 
           : 'bg-white/40 border-amber-200/50 text-amber-500'

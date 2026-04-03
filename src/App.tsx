@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { PortfolioIntro } from "./components/PortfolioIntro";
+import { LandingPage } from "./components/LandingPage";
 import { ProjectsPage } from "./components/ProjectsPage";
 import { BlogPage } from "./components/BlogPage";
 import { ContactPage } from "./components/ContactPage";
 import { UiKitPage } from "./components/UiKitPage";
 
-type Page = "intro" | "projects" | "blog" | "contact" | "uikit";
+type Page = "intro" | "landing" | "projects" | "blog" | "contact" | "uikit";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("intro");
@@ -32,8 +33,10 @@ export default function App() {
 
   const renderPage = () => {
     const props = { isDarkMode, toggleDarkMode, onBack: handleBack };
-    
+
     switch (currentPage) {
+      case "landing":
+        return <LandingPage onNavigate={handleNavigate} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
       case "projects":
         return <ProjectsPage {...props} />;
       case "blog":
@@ -43,7 +46,14 @@ export default function App() {
       case "uikit":
         return <UiKitPage {...props} />;
       default:
-        return <PortfolioIntro onNavigate={handleNavigate} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
+        return (
+          <PortfolioIntro
+            onNavigate={handleNavigate}
+            isDarkMode={isDarkMode}
+            toggleDarkMode={toggleDarkMode}
+            onComplete={() => setCurrentPage("landing")}
+          />
+        );
     }
   };
 
