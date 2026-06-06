@@ -32,15 +32,19 @@ const SkeletonCard = () => (
   </div>
 );
 
-export default function ProjectList() {
+interface ProjectListProps {
+  onProjectSelect: (project: Project) => void;
+}
+
+export default function ProjectList({ onProjectSelect }: ProjectListProps) {
   // ── State ──────────────────────────────────────────────────────────────────
-  const [projects, setProjects]     = useState<Project[]>([]);
-  const [search, setSearch]         = useState('');
-  const [category, setCategory]     = useState<Category | 'all'>('all');
-  const [sortField, setSortField]   = useState<SortField>('year');
-  const [sortOrder, setSortOrder]   = useState<SortOrder>('desc');
-  const [loading, setLoading]       = useState(true);
-  const [error, setError]           = useState<string | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState<Category | 'all'>('all');
+  const [sortField, setSortField] = useState<SortField>('year');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // ── Veri Çekme ─────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -106,7 +110,7 @@ export default function ProjectList() {
           </p>
           <h2 className="text-4xl md:text-6xl font-black italic uppercase text-slate-900 dark:text-white tracking-tighter mb-6 relative inline-block">
             Projelerim
-            <motion.div 
+            <motion.div
               className="absolute -bottom-2 left-0 right-0 h-2 bg-blue-500/20 rounded-full -z-10"
               initial={{ width: 0 }}
               whileInView={{ width: '100%' }}
@@ -191,39 +195,62 @@ export default function ProjectList() {
                     layout
                     whileHover={{ y: -10 }}
                     transition={{ duration: 0.4 }}
+                    className="relative"
                   >
+                    {project.demoUrl && (
+                      <span className="absolute top-4 right-4 z-20 px-2.5 py-1 bg-emerald-500/10 dark:bg-emerald-400/15 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20 flex items-center gap-1.5 backdrop-blur-md">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                        </span>
+                        Canlı
+                      </span>
+                    )}
                     <Card
                       title={project.title}
                       image={project.image}
                       imageAlt={project.title}
                       variant="elevated"
                       className="h-full flex flex-col group border-slate-200/60 dark:border-slate-800/60 !rounded-[2.5rem] overflow-hidden"
+                      onClick={() => onProjectSelect(project)}
+                      imageFit="contain"
                       footer={
                         <div className="flex gap-3">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="flex-1 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-[10px] font-black tracking-widest uppercase transition-all"
-                            onClick={() => window.open(project.sourceUrl || '#', '_blank')}
-                          >
-                            KODLARI İNCELE
-                          </Button>
-                          <Button
-                            variant="primary"
-                            size="sm"
-                            className="flex-1 text-[10px] font-black tracking-widest uppercase shadow-lg shadow-blue-500/25 transition-all"
-                            onClick={() => window.open(project.demoUrl || '#', '_blank')}
-                          >
-                            DEMOYA GİT
-                          </Button>
+                          {project.sourceUrl && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex-1 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-[10px] font-black tracking-widest uppercase transition-all"
+                              onClick={() => window.open(project.sourceUrl, '_blank')}
+                            >
+                              KODLARI İNCELE
+                            </Button>
+                          )}
+                          {project.demoUrl && (
+                            <Button
+                              variant="primary"
+                              size="sm"
+                              className="flex-1 text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-500/25 transition-all bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-600"
+                              onClick={() => window.open(project.demoUrl, '_blank')}
+                            >
+                              CANLIYA GİT
+                            </Button>
+                          )}
                         </div>
                       }
                     >
                       <div className="flex flex-col h-full">
                         <div className="flex justify-between items-center mb-4">
-                          <span className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[9px] font-black uppercase tracking-widest rounded-lg border border-blue-100 dark:border-blue-800/40">
-                            {project.category}
-                          </span>
+                          <div className="flex items-center gap-1.5">
+                            <span className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[9px] font-black uppercase tracking-widest rounded-lg border border-blue-100 dark:border-blue-800/40">
+                              {project.category}
+                            </span>
+                            {project.isTeamProject && (
+                              <span className="px-2.5 py-0.5 bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300 text-[8px] font-black uppercase tracking-widest rounded-md border border-violet-200/50 dark:border-violet-800/50 flex items-center gap-0.5">
+                                👥 Ekip
+                              </span>
+                            )}
+                          </div>
                           <span className="text-[11px] font-black text-slate-400 italic font-mono">
                             //{project.year}
                           </span>

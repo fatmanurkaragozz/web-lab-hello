@@ -14,11 +14,12 @@ import { applyFilters } from '../utils/projectHelpers';
 
 interface ProjectsPageProps {
   onBack: () => void;
+  onProjectSelect: (project: Project) => void;
   isDarkMode: boolean;
   toggleDarkMode: () => void;
 }
 
-export function ProjectsPage({ onBack, isDarkMode, toggleDarkMode }: ProjectsPageProps) {
+export function ProjectsPage({ onBack, onProjectSelect, isDarkMode, toggleDarkMode }: ProjectsPageProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -210,39 +211,62 @@ export function ProjectsPage({ onBack, isDarkMode, toggleDarkMode }: ProjectsPag
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.4 }}
+                      className="relative"
                     >
+                      {project.demoUrl && (
+                        <span className="absolute top-4 right-4 z-20 px-2.5 py-1 bg-emerald-500/10 dark:bg-emerald-400/15 text-emerald-600 dark:text-emerald-400 text-[9px] font-black uppercase tracking-widest rounded-full border border-emerald-500/20 flex items-center gap-1.5 backdrop-blur-md">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                          </span>
+                          Canlı
+                        </span>
+                      )}
                       <Card
                         title={project.title}
                         image={project.image}
                         imageAlt={project.title}
                         variant="elevated"
                         className="h-full flex flex-col group border border-slate-200 dark:border-slate-700/50"
+                        onClick={() => onProjectSelect(project)}
+                        imageFit="contain"
                         footer={
                           <div className="flex space-x-3">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="flex-1 border border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-800"
-                              onClick={() => window.open(project.sourceUrl || '#', '_blank')}
-                            >
-                              GitHub
-                            </Button>
-                            <Button
-                              variant="primary"
-                              size="sm"
-                              className="flex-1"
-                              onClick={() => window.open(project.demoUrl || '#', '_blank')}
-                            >
-                              Demo
-                            </Button>
+                            {project.sourceUrl && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="flex-1 border border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-800 text-[10px] font-black tracking-widest uppercase transition-all"
+                                onClick={() => window.open(project.sourceUrl, '_blank')}
+                              >
+                                GitHub
+                              </Button>
+                            )}
+                            {project.demoUrl && (
+                              <Button
+                                variant="primary"
+                                size="sm"
+                                className="flex-1 text-[10px] font-black tracking-widest uppercase shadow-lg shadow-emerald-500/25 transition-all bg-emerald-600 hover:bg-emerald-700 border-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-600"
+                                onClick={() => window.open(project.demoUrl, '_blank')}
+                              >
+                                Canlıya Git
+                              </Button>
+                            )}
                           </div>
                         }
                       >
                         <div className="flex flex-col h-full">
                           <div className="flex justify-between items-center mb-3">
-                            <span className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black uppercase tracking-tighter rounded-md border border-blue-200/50 dark:border-blue-800/50">
-                              {project.category}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-[10px] font-black uppercase tracking-tighter rounded-md border border-blue-200/50 dark:border-blue-800/50">
+                                {project.category}
+                              </span>
+                              {project.isTeamProject && (
+                                <span className="px-2 py-0.5 bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300 text-[9px] font-black uppercase tracking-tighter rounded-md border border-violet-200/50 dark:border-violet-800/50 flex items-center gap-0.5">
+                                  👥 Ekip
+                                </span>
+                              )}
+                            </div>
                             <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 italic">
                               {project.year}
                             </span>

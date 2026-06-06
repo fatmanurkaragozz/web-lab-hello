@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const SOCIAL_LINKS = [
   { name: 'GitHub',    emoji: '🐙', url: 'https://github.com/fatmanurkaragozz' },
   { name: 'LinkedIn',  emoji: '💼', url: 'https://linkedin.com' },
-  { name: 'Twitter',   emoji: '🐦', url: 'https://twitter.com' },
+  { name: 'Instagram', emoji: '📸', url: 'https://www.instagram.com/mind_of_dev1/' },
 ];
 
 const QUICK_LINKS = [
@@ -130,8 +130,8 @@ export default function Footer() {
           </div>
           
           <p className="text-[10px] font-black tracking-widest text-slate-700 uppercase flex items-center gap-2">
-            React + TypeScript + Tailwind CSS ile inşa edildi 
-            <span className="text-pink-600 animate-pulse">❤️</span>
+            Türkiye'de geliştirildi 
+            <span className="text-red-600 animate-pulse">❤️</span>
           </p>
         </div>
       </div>

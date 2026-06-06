@@ -3,5 +3,6 @@ node_modules
 
 # Ignore build output
 dist
+build
 .env
 .DS_Store

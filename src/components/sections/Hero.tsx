@@ -10,28 +10,6 @@ interface HeroProps {
 }
 
 export default function Hero({ onNavigate }: HeroProps) {
-  const subtitle = "Full Stack Developer · React & TypeScript";
-  
-  // Karakter bazlı animasyon varyantları
-  const sentence = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 1,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const letter = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
-
   return (
     <section
       id="hero"
@@ -39,7 +17,7 @@ export default function Hero({ onNavigate }: HeroProps) {
     >
       {/* ── Dinamik Arka Plan Blob'ları ──────────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, 30, 0],
@@ -48,7 +26,7 @@ export default function Hero({ onNavigate }: HeroProps) {
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-400/20 dark:bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, -40, 0],
@@ -73,30 +51,42 @@ export default function Hero({ onNavigate }: HeroProps) {
 
         {/* ── Akıllı Responsive İsim (Wrap Özelliği) ─────────────────────────── */}
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-9xl font-black italic uppercase
-                     text-slate-900 dark:text-white tracking-tighter mb-6 leading-[0.9]
-                     flex flex-wrap justify-center gap-x-[0.3em]"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="text-5xl md:text-7xl lg:text-8xl font-black
+                     text-slate-900 dark:text-white tracking-tight mb-6 leading-[1.1]
+                     flex flex-wrap justify-center gap-x-[0.3em] font-display"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <span className="inline-block text-blue-600 dark:text-blue-400">Fatma Nur</span>
           <span className="inline-block">Karagöz</span>
         </motion.h1>
 
-        {/* ── Karakter Bazlı Yazma Efekti (Subtitle) ────────────────────────── */}
-        <motion.p
-          className="text-lg md:text-2xl text-slate-600 dark:text-slate-300 font-medium mb-12 min-h-[1.5em]"
-          variants={sentence}
-          initial="hidden"
-          animate="visible"
-        >
-          {subtitle.split("").map((char, index) => (
-            <motion.span key={`${char}-${index}`} variants={letter}>
-              {char}
-            </motion.span>
-          ))}
-        </motion.p>
+        {/* ── Subtitle (Unvan & Öğrenci Durumu) ────────────────────────── */}
+        <div className="flex flex-col items-center justify-center gap-3 mb-12">
+          {/* Full Stack Developer - Soft Display Font, Semibold, Title Case */}
+          <motion.div
+            className="text-2xl md:text-3xl font-semibold tracking-wide
+                       text-slate-800 dark:text-slate-200 select-none font-display"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+          >
+            Full Stack Developer
+          </motion.div>
+
+          {/* Elegant Sub-text - Yazılım Mühendisliği Öğrencisi */}
+          <motion.div
+            className="text-base md:text-lg text-slate-500 dark:text-slate-400 font-medium tracking-wide font-sans flex items-center gap-2"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50 dark:bg-blue-400/50 animate-pulse" />
+            <span>Yazılım Mühendisliği Öğrencisi</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500/50 dark:bg-purple-400/50 animate-pulse" />
+          </motion.div>
+        </div>
 
         {/* CTA Butonları */}
         <motion.div
@@ -113,12 +103,12 @@ export default function Hero({ onNavigate }: HeroProps) {
                          transition-all duration-300 group overflow-hidden relative"
             >
               <span className="relative z-10">🚀 Projelerimi Gör</span>
-              <motion.div 
-                className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" 
+              <motion.div
+                className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"
               />
             </Button>
           </a>
-          
+
           <a href="#contact">
             <Button
               variant="ghost"
