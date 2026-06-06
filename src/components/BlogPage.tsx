@@ -19,7 +19,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       readTime: "4 dk okuma",
       date: "14 Mart 2025",
       tags: ["Chess", "Artifical Intelligence", "Machine Learning", "AlphaZero", "Deep Learning"],
-      image: "/images/sahmat.png",
+      image: "./images/sahmat.png",
       url: "https://medium.com/@fatmaNurK/%C5%9Fah-mat-yapay-zeka-vs-i%CC%87nsan-63c841406ad9"
     },
     {
@@ -29,7 +29,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       readTime: "3 dk okuma",
       date: "20 Şubat 2025",
       tags: ["Matrisler", "Görüntü İşleme", "Matematik", "Yapay Zeka", "Algoritmalar"],
-      image: "/images/matrisler.png",
+      image: "./images/matrisler.png",
       url: "https://medium.com/@fatmaNurK/matrislerin-yaz%C4%B1l%C4%B1m-d%C3%BCnyas%C4%B1ndaki-evrimi-ve-reginald-denny-olay%C4%B1-matemati%C4%9Fin-su%C3%A7-tespitindeki-g%C3%BCc%C3%BC-edaf787fbc74"
     },
     {
@@ -39,7 +39,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       readTime: "3 dk okuma",
       date: "27 Ocak 2025",
       tags: ["Veri Bilimi", "Yapay Zeka", "Veri Manipülasyonu"],
-      image: "/images/ai.png",
+      image: "./images/ai.png",
       url: "https://medium.com/@fatmaNurK/yapay-zeka-ve-veri-bilimi-gelece%C4%9Fi-i%CC%87n%C5%9Fa-eden-g%C3%BC%C3%A7ler-5bd1611ab05f"
     },
     {
@@ -49,10 +49,9 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       readTime: "5 dk okuma",
       date: "22 Nisan 2026",
       tags: ["Operating Systems", "Deadlock", "Concurrency", "Computer Science"],
-      image: "/images/filozofi.png",
+      image: "./images/filozofi.png",
       url: "https://medium.com/@fatmaNurK/%C3%B6%C4%9Frenci-g%C3%B6z%C3%BCnden-1-ac%C4%B1km%C4%B1%C5%9F-filozoflar-chopstickler-ve-i%CC%87%C5%9Fletim-sisteminin-kabusu-deadlock-7b357782b4a7"
     },
-
   ];
 
   return (

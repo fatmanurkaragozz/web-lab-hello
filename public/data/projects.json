@@ -15,10 +15,10 @@
     "category": "fullstack",
     "featured": true,
     "image": [
-      "/images/tart-platformm.png",
-      "/images/tart-foto2.png",
-      "/images/tart-foto3.png",
-      "/images/tart-foto4.png"
+      "./images/tart-platformm.png",
+      "./images/tart-foto2.png",
+      "./images/tart-foto3.png",
+      "./images/tart-foto4.png"
     ],
     "sourceUrl": "https://github.com/fatmanurkaragozz/TART",
     "demoUrl": "https://tart.azurewebsites.net/"
@@ -39,9 +39,9 @@
     "category": "frontend",
     "featured": false,
     "image": [
-      "/images/te4it.png",
-      "/images/te4it-foto2.png",
-      "/images/te4it-foto3.png"
+      "./images/te4it.png",
+      "./images/te4it-foto2.png",
+      "./images/te4it-foto3.png"
     ],
     "sourceUrl": "https://github.com/burhanarslanbas/TE4IT",
     "demoUrl": "https://thankful-glacier-00e0df210.2.azurestaticapps.net/",
@@ -61,13 +61,13 @@
     "category": "frontend",
     "featured": true,
     "image": [
-      "/images/qr1.png",
-      "/images/qr2.png",
-      "/images/qr3.png",
-      "/images/qr4.png",
-      "/images/qr5.png",
-      "/images/qr6.png",
-      "/images/qr7.png"
+      "./images/qr1.png",
+      "./images/qr2.png",
+      "./images/qr3.png",
+      "./images/qr4.png",
+      "./images/qr5.png",
+      "./images/qr6.png",
+      "./images/qr7.png"
     ],
     "sourceUrl": "https://github.com/fatmanurkaragozz/CAFE-QRMENU",
     "isTeamProject": true,
@@ -86,10 +86,10 @@
     "category": "backend",
     "featured": false,
     "image": [
-      "/images/hospital1.png",
-      "/images/hospital2.png",
-      "/images/hospital3.png",
-      "/images/hospital4.png"
+      "./images/hospital1.png",
+      "./images/hospital2.png",
+      "./images/hospital3.png",
+      "./images/hospital4.png"
     ],
     "sourceUrl": "https://github.com/fatmanurkaragozz/Hospital-Automation"
   }

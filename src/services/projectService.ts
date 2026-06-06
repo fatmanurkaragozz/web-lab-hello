@@ -1,6 +1,6 @@
 import type { Project } from "../types/project";
 
-const API_URL = "/data/projects.json";
+const API_URL = "./data/projects.json";
 
 export async function fetchProjects(): Promise<Project[]> {
   try {

@@ -55,7 +55,7 @@ export default function About() {
               <div className="w-56 h-72 md:w-72 md:h-96 rounded-3xl overflow-hidden border-4
                               border-white dark:border-slate-800 shadow-2xl relative z-10">
                 <ImageWithFallback
-                  src="/ppp.jpeg"
+                  src="./ppp.jpeg"
                   alt="Fatma Nur Karagöz profil fotoğrafı"
                   className="w-full h-full object-cover object-[center_20%]"
                 />

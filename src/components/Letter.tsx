@@ -134,7 +134,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: 
                   <figure className="relative m-0">
                     <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl relative z-10">
                       <ImageWithFallback
-                        src="/ppp.jpeg"
+                        src="./ppp.jpeg"
                         alt="Fatma Nur Karagöz'ün vesikalığı"
                         className="w-full h-full object-cover"
                       />

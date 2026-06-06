@@ -21,7 +21,7 @@ export function SemanticSkeleton() {
           <h2>Hakkimda</h2>
           <div className="about-content">
             <figure>
-              <img src="/ppp.jpeg" alt="Profil resmi" style={{ objectFit: 'cover', objectPosition: 'center 20%' }} />
+              <img src="./ppp.jpeg" alt="Profil resmi" style={{ objectFit: 'cover', objectPosition: 'center 20%' }} />
             </figure>
             <div>
               <p>
