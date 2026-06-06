@@ -6,17 +6,17 @@ import { motion } from 'framer-motion';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 const INFO_CARDS = [
-  { emoji: '💼', label: 'Meslek',   value: 'Full Stack Developer' },
-  { emoji: '📍', label: 'Konum',    value: 'Türkiye, Ankara' },
-  { emoji: '⏳', label: 'Deneyim',  value: '2+ Yıl' },
-  { emoji: '🎓', label: 'Eğitim',   value: 'Yazılım Mühendisliği' },
+  { emoji: '💼', label: 'Meslek', value: 'Öğrenci' },
+  { emoji: '📍', label: 'Konum', value: 'Türkiye, Ankara' },
+  { emoji: '⏳', label: 'Deneyim', value: '3. Sınıf Öğrencisi' },
+  { emoji: '🎓', label: 'Eğitim', value: 'Yazılım Mühendisliği' },
 ];
 
 const INTERESTS = [
   { emoji: '📚', label: 'Kitap Okumak' },
   { emoji: '🏔️', label: 'Doğa Yürüyüşü' },
   { emoji: '☕', label: 'Kahve Deneyleri' },
-  { emoji: '🎮', label: 'Oyun Geliştirme' },
+  { emoji: '🎬', label: 'Dizi & Film İzlemek' },
 ];
 
 export default function About() {
@@ -52,12 +52,12 @@ export default function About() {
           >
             {/* Fotoğraf */}
             <div className="relative">
-              <div className="w-56 h-56 md:w-72 md:h-72 rounded-3xl overflow-hidden border-4
+              <div className="w-56 h-72 md:w-72 md:h-96 rounded-3xl overflow-hidden border-4
                               border-white dark:border-slate-800 shadow-2xl relative z-10">
                 <ImageWithFallback
                   src="/ppp.jpeg"
                   alt="Fatma Nur Karagöz profil fotoğrafı"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[center_20%]"
                 />
               </div>
               {/* Dekoratif çerçeve */}
@@ -66,7 +66,7 @@ export default function About() {
               {/* Rozet */}
               <div className="absolute -bottom-4 -right-4 bg-blue-600 text-white
                               rounded-2xl px-4 py-2 font-black text-sm shadow-lg shadow-blue-500/30 z-20">
-                ✨ Açık İş Arayışında
+                ✨ Staj Arayışında
               </div>
             </div>
 
@@ -113,16 +113,20 @@ export default function About() {
                 Benim Hikayem
               </h3>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                Yazılım Mühendisliği öğrencisiyim. Modern web teknolojileri ile
-                kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar
-                geliştiriyorum. Temiz kod yazmak ve iyi kullanıcı deneyimi
-                tasarlamak benim için bir tutku.
+                Yazılım Mühendisliği öğrencisi olarak modern teknolojileri kullanarak yüksek performanslı, 
+                ölçeklenebilir altyapılar ve kullanıcı dostu uygulamalar geliştiriyorum. Geliştirme süreçlerimi 
+                sadece pratik kod üretimiyle sınırlamıyor; algoritma analizi ve optimizasyon prensipleriyle temellendiriyorum. 
+                Kod kalitesine, temiz kod (clean code) mimarilerine ve sürdürülebilirliğe en üst düzeyde önem veriyorum.
+              </p>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                React, TypeScript ve Node.js ekosistemlerindeki pratik geliştirme deneyimimi, bilgisayar biliminin teorik 
+                gücüyle besliyorum. Makine öğrenmesi ve büyük dil modelleri (LLM) üzerine yürüttüğüm bilimsel/akademik 
+                araştırmalarla Ar-Ge vizyonumu güçlendiriyorum.
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                React, TypeScript ve Node.js ekosisteminde kendimi geliştirirken
-                aynı zamanda UI/UX tasarım prensiplerini de benimsedim.
-                Her projemde performans, erişilebilirlik ve estetik dengesini
-                gözetiyorum.
+                Teknik derinliği, modern UI/UX tasarım prensipleriyle birleştirerek estetik, erişilebilir ve yüksek 
+                mühendislik standartlarına sahip çözümler üretmek en büyük tutkum. Her çalışmamda performans, kullanıcı deneyimi 
+                ve estetik dengesini titizlikle gözetiyorum.
               </p>
             </div>
 

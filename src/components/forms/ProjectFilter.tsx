@@ -60,31 +60,46 @@ export default function ProjectFilter({
     >
       <div className="flex flex-col lg:flex-row gap-6 items-end">
         {/* Arama Kutusu */}
-        <div className="flex-1 w-full relative">
-          <Input
-            id="project-search"
-            label="Proje Ara"
-            placeholder="Başlık, açıklama veya teknoloji..."
-            value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="!bg-white/40 dark:!bg-slate-800/40"
-          />
-          
-          <AnimatePresence>
-            {isAnyFilterActive && (
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                onClick={clearFilters}
-                className="absolute right-4 bottom-3.5 text-[10px] font-black uppercase tracking-widest
-                           bg-slate-200 dark:bg-slate-700 px-3 py-1 rounded-lg
-                           hover:bg-red-500 hover:text-white transition-colors"
-              >
-                Sıfırla ✕
-              </motion.button>
-            )}
-          </AnimatePresence>
+        <div className="flex-1 w-full relative flex flex-col gap-2">
+          <label htmlFor="project-search" className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest px-1">
+            Proje Ara
+          </label>
+          <div className="relative flex items-center">
+            {/* Magnifying Glass Icon */}
+            <div className="absolute left-4 text-slate-400 pointer-events-none">
+              <svg className="h-5 w-5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            
+            <input
+              id="project-search"
+              type="text"
+              placeholder="Anahtar kelime veya teknoloji ara..."
+              value={search}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="w-full pl-12 pr-24 py-3 rounded-2xl border border-slate-200 dark:border-slate-700/50
+                         bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-md text-sm font-medium
+                         text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500
+                         focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300"
+            />
+
+            <AnimatePresence>
+              {isAnyFilterActive && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  onClick={clearFilters}
+                  className="absolute right-3 text-[10px] font-bold tracking-wider
+                             bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-xl
+                             hover:bg-red-500 hover:text-white transition-colors cursor-pointer"
+                >
+                  Sıfırla ✕
+                </motion.button>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Kategori Filtresi */}
@@ -97,25 +112,32 @@ export default function ProjectFilter({
             role="group"
             aria-label="Kategori filtresi"
           >
-            {CATEGORIES.map((cat) => (
-              <motion.button
-                key={cat.value}
-                onClick={() => onCategoryChange(cat.value)}
-                aria-pressed={category === cat.value}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-tighter
-                            transition-all duration-300 flex items-center gap-2
-                            ${
-                              category === cat.value
-                                ? 'bg-blue-600 text-white shadow-xl shadow-blue-500/40 scale-105'
-                                : 'bg-white/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
-                            }`}
-              >
-                <span className="text-sm">{cat.emoji}</span>
-                <span>{cat.label}</span>
-              </motion.button>
-            ))}
+            {CATEGORIES.map((cat) => {
+              const isActive = category === cat.value;
+              return (
+                <button
+                  key={cat.value}
+                  onClick={() => onCategoryChange(cat.value)}
+                  aria-pressed={isActive}
+                  className="relative px-5 py-3 rounded-2xl text-xs font-semibold tracking-wide
+                             transition-all duration-300 flex items-center gap-2 overflow-hidden cursor-pointer
+                             text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+                >
+                  {/* Sliding Background */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeCategory"
+                      className="absolute inset-0 bg-blue-600/10 dark:bg-blue-400/15 border border-blue-500/30 rounded-2xl -z-10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="text-sm">{cat.emoji}</span>
+                  <span className={isActive ? "text-blue-600 dark:text-blue-400 font-bold" : ""}>
+                    {cat.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -125,31 +147,37 @@ export default function ProjectFilter({
             <p className="text-xs font-bold mb-2 text-slate-500 dark:text-slate-400 uppercase tracking-widest px-1">
               Sırala
             </p>
-            <select
-              value={sortField}
-              onChange={(e) => onSortFieldChange(e.target.value as SortField)}
-              className="w-full border border-slate-200 dark:border-slate-700/50 rounded-xl
-                         px-4 py-2.5 text-sm font-bold bg-white/40 dark:bg-slate-800/40
-                         text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-blue-500 outline-none
-                         appearance-none cursor-pointer"
-            >
-              <option value="year">📅 Yıla Göre</option>
-              <option value="title">🔤 Başlığa Göre</option>
-            </select>
+            <div className="relative">
+              <select
+                value={sortField}
+                onChange={(e) => onSortFieldChange(e.target.value as SortField)}
+                className="w-full border border-slate-200 dark:border-slate-700/50 rounded-2xl
+                           px-5 py-3 text-xs font-semibold bg-slate-50/50 dark:bg-slate-900/50
+                           text-slate-700 dark:text-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none
+                           appearance-none cursor-pointer pr-10"
+              >
+                <option value="year">📅 Yıla Göre</option>
+                <option value="title">🔤 Başlığa Göre</option>
+              </select>
+              {/* Arrow Indicator */}
+              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-400">
+                <svg className="h-4 w-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
           </div>
 
-          <Button
-            variant="ghost"
-            size="sm"
+          <button
             onClick={() =>
               onSortOrderChange(sortOrder === 'asc' ? 'desc' : 'asc')
             }
-            className="h-[46px] bg-slate-100 dark:bg-slate-800 text-slate-700
-                       dark:text-slate-200 rounded-xl border border-slate-200 dark:border-slate-700
-                       hover:border-blue-500 transition-all font-black text-[10px] min-w-[80px]"
+            className="h-11 px-4 text-xs font-semibold bg-slate-50/50 dark:bg-slate-900/50 text-slate-700
+                       dark:text-slate-200 rounded-2xl border border-slate-200 dark:border-slate-700/50
+                       hover:border-blue-500 dark:hover:border-blue-400 transition-all min-w-[80px] cursor-pointer"
           >
             {sortOrder === 'asc' ? '↑ Artan' : '↓ Azalan'}
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -164,10 +192,6 @@ export default function ProjectFilter({
           <span className="text-blue-600 dark:text-blue-400 text-sm font-black">{resultCount}</span>
           {' '}adet proje gösteriliyor
         </motion.p>
-        
-        <span className="text-[10px] font-black uppercase text-slate-300 dark:text-slate-700 tracking-[0.2em]">
-          Lab 6 - Uygulama 5
-        </span>
       </div>
     </motion.div>
   );

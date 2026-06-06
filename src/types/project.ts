@@ -17,9 +17,11 @@ export interface Project {
   year: number;
   category: Category;
   featured: boolean;
-  image: string;
+  image: string | string[];
   demoUrl?: string; // PDF: demoUrl
   sourceUrl?: string; // PDF: sourceUrl
+  isTeamProject?: boolean;
+  teamRole?: string;
 }
 
 // Filtre durumu

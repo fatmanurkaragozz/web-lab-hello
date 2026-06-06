@@ -11,8 +11,8 @@ export default function PageBackground({ isDarkMode }: PageBackgroundProps) {
       <motion.div
         className="absolute inset-0 transition-colors duration-1000"
         animate={{
-          background: isDarkMode 
-            ? 'linear-gradient(to bottom, #1e1b4b, #0f172a, #000000)' 
+          background: isDarkMode
+            ? 'linear-gradient(to bottom, #1e1b4b, #0f172a, #000000)'
             : 'linear-gradient(to bottom, #38bdf8, #7dd3fc, #e0f2fe)'
         }}
       />
@@ -40,7 +40,7 @@ export default function PageBackground({ isDarkMode }: PageBackgroundProps) {
         }}
         transition={{ duration: 1 }}
       />
-      
+
       {/* Bulutlar / Yıldızlar */}
       <AnimatePresence mode="wait">
         {!isDarkMode ? (
@@ -52,15 +52,22 @@ export default function PageBackground({ isDarkMode }: PageBackgroundProps) {
             transition={{ duration: 1 }}
           >
             {[
-              { top: '15%', left: '10%', w: 'w-24', h: 'h-10', d: 15 },
-              { top: '30%', right: '15%', w: 'w-32', h: 'h-14', d: 20 },
-              { top: '45%', left: '25%', w: 'w-20', h: 'h-8', d: 12 }
+              { top: '12%', left: '10%', w: 'w-36', h: 'h-16', d: 35 },
+              { top: '25%', right: '15%', w: 'w-48', h: 'h-24', d: 45 },
+              { top: '42%', left: '20%', w: 'w-40', h: 'h-20', d: 40 },
+              { top: '60%', right: '25%', w: 'w-32', h: 'h-16', d: 28 },
+              { top: '75%', left: '15%', w: 'w-44', h: 'h-20', d: 32 }
             ].map((cloud, i) => (
               <motion.div
                 key={i}
-                className={`absolute ${cloud.top} ${cloud.left || ''} ${cloud.right || ''} ${cloud.w} ${cloud.h} bg-white/80 rounded-full blur-md`}
-                animate={cloud.left ? { x: [0, 50, 0] } : { x: [0, -50, 0] }}
-                transition={{ duration: cloud.d, repeat: Infinity, ease: "linear" }}
+                style={{
+                  top: cloud.top,
+                  left: cloud.left,
+                  right: cloud.right
+                }}
+                className={`absolute ${cloud.w} ${cloud.h} bg-white/50 rounded-full shadow-sm border border-white/30 backdrop-blur-[1px]`}
+                animate={cloud.left ? { x: [-50, 100, -50] } : { x: [50, -100, 50] }}
+                transition={{ duration: cloud.d, repeat: Infinity, ease: "easeInOut" }}
               />
             ))}
           </motion.div>
@@ -76,15 +83,15 @@ export default function PageBackground({ isDarkMode }: PageBackgroundProps) {
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-white rounded-full shadow-[0_0_5px_#fff]"
-                style={{ 
-                  top: `${Math.random() * 50}%`, 
-                  left: `${Math.random() * 100}%` 
+                style={{
+                  top: `${Math.random() * 50}%`,
+                  left: `${Math.random() * 100}%`
                 }}
                 animate={{ opacity: [0.2, 0.8, 0.2], scale: [1, 1.2, 1] }}
-                transition={{ 
-                  duration: 2 + Math.random() * 3, 
-                  repeat: Infinity, 
-                  delay: Math.random() * 5 
+                transition={{
+                  duration: 2 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 5
                 }}
               />
             ))}

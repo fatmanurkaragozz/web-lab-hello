@@ -15,11 +15,11 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
     {
       id: 1,
       title: "ŞAH MAT : YAPAY ZEKA VS İNSAN",
-      excerpt: "Geçenlerde bir satranç turnuvasına katıldım ve gerçekten güçlü rakiplerle karşılaştım. Her maçta zorlu hamleler, stratejik hesaplamalar derken aklıma bir soru takıldı: “Acaba dünyanın en iyi satranç oyuncularından biriyle oynasaydım nasıl bir sonuç alırdım?” Ama bu kez rakibim bir insan değil, bir yapay zekâ olacaktı.",
+      excerpt: "Geçenlerde bir satranç turnuvasına katıldım ve gerçekten güçlü rakiplerle karşılaştım. Aklıma bir soru takıldı: “Acaba dünyanın en iyi satranç oyuncularından biriyle oynasaydım nasıl bir sonuç alırdım?” Ama bu kez rakibim bir insan değil, bir yapay zekâ olacaktı.",
       readTime: "4 dk okuma",
       date: "14 Mart 2025",
-      tags: ["React", "JavaScript", "Frontend"],
-      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop",
+      tags: ["Chess", "Artifical Intelligence", "Machine Learning", "AlphaZero", "Deep Learning"],
+      image: "/images/sahmat.png",
       url: "https://medium.com/@fatmaNurK/%C5%9Fah-mat-yapay-zeka-vs-i%CC%87nsan-63c841406ad9"
     },
     {
@@ -28,19 +28,29 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       excerpt: "Matrisler, günümüzde birçok bilimsel ve teknolojik alanda kritik bir araç olarak kullanılmaktadır. Tarih boyunca bu matematiksel yapı, farklı alanlarda gelişerek bugünkü güçlü halini almıştır.",
       readTime: "3 dk okuma",
       date: "20 Şubat 2025",
-      tags: ["TypeScript", "JavaScript", "Development"],
-      image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=200&fit=crop",
+      tags: ["Matrisler", "Görüntü İşleme", "Matematik", "Yapay Zeka", "Algoritmalar"],
+      image: "/images/matrisler.png",
       url: "https://medium.com/@fatmaNurK/matrislerin-yaz%C4%B1l%C4%B1m-d%C3%BCnyas%C4%B1ndaki-evrimi-ve-reginald-denny-olay%C4%B1-matemati%C4%9Fin-su%C3%A7-tespitindeki-g%C3%BCc%C3%BC-edaf787fbc74"
     },
     {
       id: 3,
       title: "Yapay Zeka ve Veri Bilimi: Geleceği İnşa Eden Güçler",
-      excerpt: "Yapay zeka ve makine öğrenimi, günümüz dünyasında hayatın birçok alanında devrim yaratıyor. Bu yazıda, yapay zekanın farklı sektörlerdeki kullanım alanlarını, ilgili algoritmaları ve gerçek dünya örnekleriyle inceleyeceğiz. Ayrıca veri bilimi ve yapay zekaya ilgi duyanlar için temel kavramlara da değineceğiz.",
+      excerpt: "Bu yazıda, yapay zekanın farklı sektörlerdeki kullanım alanlarını, ilgili algoritmaları ve gerçek dünya örnekleriyle inceleyeceğiz. Ayrıca veri bilimi ve yapay zekaya ilgi duyanlar için temel kavramlara da değineceğiz.",
       readTime: "3 dk okuma",
       date: "27 Ocak 2025",
-      tags: ["Next.js", "React", "Full-Stack"],
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
+      tags: ["Veri Bilimi", "Yapay Zeka", "Veri Manipülasyonu"],
+      image: "/images/ai.png",
       url: "https://medium.com/@fatmaNurK/yapay-zeka-ve-veri-bilimi-gelece%C4%9Fi-i%CC%87n%C5%9Fa-eden-g%C3%BC%C3%A7ler-5bd1611ab05f"
+    },
+    {
+      id: 4,
+      title: "Acıkmış Filozoflar, Chopstickler ve İşletim Sisteminin Kabusu (Deadlock)",
+      excerpt: "İşletim Sistemleri dersinin o meşhur problemi: “Yemek Yiyen Filozoflar Problemi” (Dining Philosophers). Aslında bu konu, bilişim dünyasıyla hiç ilginiz olmasa bile, kafanızda bir işletim sisteminin temel mantığını oturtmanızı sağlayacak harika bir metafor.",
+      readTime: "5 dk okuma",
+      date: "22 Nisan 2026",
+      tags: ["Operating Systems", "Deadlock", "Concurrency", "Computer Science"],
+      image: "/images/filozofi.png",
+      url: "https://medium.com/@fatmaNurK/%C3%B6%C4%9Frenci-g%C3%B6z%C3%BCnden-1-ac%C4%B1km%C4%B1%C5%9F-filozoflar-chopstickler-ve-i%CC%87%C5%9Fletim-sisteminin-kabusu-deadlock-7b357782b4a7"
     },
 
   ];
@@ -53,7 +63,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
       transition={{ duration: 0.8 }}
     >
       <PageBackground isDarkMode={isDarkMode} />
-      
+
       {/* Üst Navigasyon - Geri Dön Butonu */}
       <div className="fixed top-6 left-24 z-[110]">
         <Button
@@ -70,7 +80,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
 
       <div className="relative max-w-7xl mx-auto z-10 pt-44">
         {/* Header */}
-        <motion.header 
+        <motion.header
           className="mb-12"
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -101,6 +111,7 @@ export function BlogPage({ onBack, isDarkMode, toggleDarkMode }: BlogPageProps) 
               imageAlt={article.title}
               variant="elevated"
               className="group cursor-pointer"
+              imageClassName="w-full aspect-[16/9] object-cover object-center transition-transform duration-500 group-hover:scale-105"
               footer={
                 <Button
                   variant="ghost"

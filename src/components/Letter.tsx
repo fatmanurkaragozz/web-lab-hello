@@ -175,7 +175,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: 
                         <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white text-lg shadow-sm">💼</div>
                         <div>
                           <p className="text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Mesleğim</p>
-                          <p className="text-gray-900 dark:text-white font-medium">Full Stack Developer</p>
+                          <p className="text-gray-900 dark:text-white font-medium">Öğrenci</p>
                         </div>
                       </div>
 
@@ -191,7 +191,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: 
                         <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white text-lg shadow-sm">⏳</div>
                         <div>
                           <p className="text-gray-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Deneyim</p>
-                          <p className="text-gray-900 dark:text-white font-medium">2+ Yıldır Uğraşıyorum</p>
+                          <p className="text-gray-900 dark:text-white font-medium">3. Sınıf Öğrencisi</p>
                         </div>
                       </div>
                     </div>
@@ -216,7 +216,7 @@ export function Letter({ isOpen, onAnimationComplete, onNavigate, isDarkMode }: 
                     <section className="bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:to-slate-800 p-6 rounded-xl border border-blue-50 dark:border-slate-800 hover:from-blue-50/50 hover:to-purple-50/50 transition-all">
                       <h2 className="text-gray-900 dark:text-white font-bold mb-4">Hakkımda</h2>
                       <p className="text-gray-600 dark:text-slate-300 text-sm leading-relaxed">
-                        Yazılım Mühendisliği öğrencisiyim. Modern web teknolojileri ile kullanıcı dostu, performanslı ve ölçeklenebilir uygulamalar geliştiriyorum.
+                        Yazılım Mühendisliği öğrencisiyim. Bilgisayar biliminin teorik gücünü, yapay zeka/makine öğrenmesi araştırmaları ve modern web ekosistemiyle harmanlıyorum.
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-xs text-gray-500 dark:text-slate-400 flex items-center gap-2">📚 Kitap Okumak</li>

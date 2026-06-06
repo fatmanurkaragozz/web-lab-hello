@@ -15,21 +15,22 @@ const SKILL_GROUPS: { category: string; color: string; skills: Skill[] }[] = [
     category: 'Frontend',
     color: 'from-blue-500 to-cyan-500',
     skills: [
-      { name: 'React',       emoji: '⚛️', level: 5 },
-      { name: 'TypeScript',  emoji: '📘', level: 4 },
-      { name: 'Next.js',     emoji: '▲',  level: 4 },
-      { name: 'Tailwind CSS',emoji: '🎨', level: 5 },
-      { name: 'Framer Motion',emoji:'✨', level: 3 },
+      { name: 'React', emoji: '⚛️', level: 5 },
+      { name: 'TypeScript', emoji: '📘', level: 4 },
+      { name: 'Next.js', emoji: '▲', level: 4 },
+      { name: 'Tailwind CSS', emoji: '🎨', level: 5 },
+      { name: 'Framer Motion', emoji: '✨', level: 3 },
     ],
   },
   {
     category: 'Backend',
     color: 'from-green-500 to-emerald-500',
     skills: [
-      { name: 'Node.js',    emoji: '🟢', level: 4 },
+      { name: 'Node.js', emoji: '🟢', level: 4 },
       { name: 'Express.js', emoji: '🚂', level: 4 },
       { name: 'PostgreSQL', emoji: '🐘', level: 3 },
-      { name: 'REST API',   emoji: '🔌', level: 4 },
+      { name: 'C#', emoji: '🎯', level: 3 },
+      { name: 'REST API', emoji: '🔌', level: 4 },
     ],
   },
   {
@@ -37,9 +38,10 @@ const SKILL_GROUPS: { category: string; color: string; skills: Skill[] }[] = [
     color: 'from-purple-500 to-pink-500',
     skills: [
       { name: 'Git & GitHub', emoji: '🐙', level: 5 },
-      { name: 'VS Code',      emoji: '💻', level: 5 },
-      { name: 'Figma',        emoji: '🖌️', level: 3 },
-      { name: 'Vite',         emoji: '⚡', level: 4 },
+      { name: 'VS Code', emoji: '💻', level: 5 },
+      { name: 'Figma', emoji: '🖌️', level: 3 },
+      { name: 'Vite', emoji: '⚡', level: 4 },
+      { name: 'Colab', emoji: '🧪', level: 2 },
     ],
   },
 ];
@@ -50,11 +52,10 @@ function SkillBar({ level }: { level: number }) {
       {[1, 2, 3, 4, 5].map((dot) => (
         <div
           key={dot}
-          className={`h-1 flex-1 rounded-full transition-all ${
-            dot <= level
+          className={`h-1 flex-1 rounded-full transition-all ${dot <= level
               ? 'bg-blue-500 dark:bg-blue-400'
               : 'bg-slate-200 dark:bg-slate-700'
-          }`}
+            }`}
         />
       ))}
     </div>
@@ -67,7 +68,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 

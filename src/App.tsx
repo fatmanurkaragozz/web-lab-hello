@@ -5,12 +5,16 @@ import { ProjectsPage } from "./components/ProjectsPage";
 import { BlogPage } from "./components/BlogPage";
 import { ContactPage } from "./components/ContactPage";
 import { UiKitPage } from "./components/UiKitPage";
+import ProjectDetailPage from "./components/ProjectDetailPage";
+import { Project } from "./types/project";
 
-type Page = "intro" | "landing" | "projects" | "blog" | "contact" | "uikit";
+type Page = "intro" | "landing" | "projects" | "blog" | "contact" | "uikit" | "project-detail";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("intro");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [previousPage, setPreviousPage] = useState<Page>("landing");
 
   // Tema değişikliğini HTML elementine yansıt
   useEffect(() => {
@@ -31,20 +35,50 @@ export default function App() {
     setCurrentPage("intro");
   };
 
+  const handleProjectSelect = (project: Project) => {
+    setPreviousPage(currentPage);
+    setSelectedProject(project);
+    setCurrentPage("project-detail");
+  };
+
+  const handleBackFromDetail = () => {
+    setCurrentPage(previousPage);
+  };
+
   const renderPage = () => {
     const props = { isDarkMode, toggleDarkMode, onBack: handleBack };
 
     switch (currentPage) {
       case "landing":
-        return <LandingPage onNavigate={handleNavigate} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />;
+        return (
+          <LandingPage 
+            onNavigate={handleNavigate} 
+            onProjectSelect={handleProjectSelect}
+            isDarkMode={isDarkMode} 
+            toggleDarkMode={toggleDarkMode} 
+          />
+        );
       case "projects":
-        return <ProjectsPage {...props} />;
+        return <ProjectsPage {...props} onProjectSelect={handleProjectSelect} />;
       case "blog":
         return <BlogPage {...props} />;
       case "contact":
         return <ContactPage {...props} />;
       case "uikit":
         return <UiKitPage {...props} />;
+      case "project-detail":
+        if (!selectedProject) {
+          setCurrentPage("landing");
+          return null;
+        }
+        return (
+          <ProjectDetailPage
+            project={selectedProject}
+            onBack={handleBackFromDetail}
+            isDarkMode={isDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
+        );
       default:
         return (
           <PortfolioIntro

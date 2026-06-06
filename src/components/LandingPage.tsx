@@ -15,11 +15,12 @@ import PageBackground from './PageBackground';
 
 interface LandingPageProps {
   onNavigate:    (page: string) => void;
+  onProjectSelect: (project: any) => void;
   isDarkMode:    boolean;
   toggleDarkMode: () => void;
 }
 
-export function LandingPage({ onNavigate, isDarkMode, toggleDarkMode }: LandingPageProps) {
+export function LandingPage({ onNavigate, onProjectSelect, isDarkMode, toggleDarkMode }: LandingPageProps) {
   return (
     <motion.div
       className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white relative"
@@ -46,7 +47,7 @@ export function LandingPage({ onNavigate, isDarkMode, toggleDarkMode }: LandingP
           <Hero onNavigate={onNavigate} />
           <About />
           <Skills />
-          <ProjectList />
+          <ProjectList onProjectSelect={onProjectSelect} />
           <ContactSection />
         </main>
 

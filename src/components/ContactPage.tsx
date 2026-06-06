@@ -51,15 +51,15 @@ export function ContactPage({ onBack, isDarkMode, toggleDarkMode }: ContactPageP
       color: "from-gray-600 to-gray-800"
     },
     {
-      name: "Twitter",
-      icon: "🐦",
-      url: "https://twitter.com/username",
-      color: "from-blue-400 to-blue-600"
+      name: "LinkedIn",
+      icon: "💼",
+      url: "https://linkedin.com/in/username",
+      color: "from-blue-600 to-indigo-700"
     },
     {
       name: "Instagram",
       icon: "📷",
-      url: "https://instagram.com/username",
+      url: "https://www.instagram.com/mind_of_dev1/",
       color: "from-pink-400 to-purple-600"
     },
     {

@@ -86,12 +86,18 @@ function validate(data: ContactFormData): FormErrors {
 // ──────────────────────────────────────────
 // Ana ContactForm Component'i
 // ──────────────────────────────────────────
+// ──────────────────────────────────────────
+// Web3Forms Yapılandırması
+// Ücretsiz API anahtarınızı https://web3forms.com/ adresinden alıp buraya yazın:
+// ──────────────────────────────────────────
+const WEB3FORMS_ACCESS_KEY = "d74ba8d9-5988-4741-9be9-87fe0411005f";
+
 export default function ContactForm() {
-  // PDF: Satır 28-35 — 4 state yönetimi
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // ──────────────────────────────────────────
   // Tek Alan Güncelleme (PDF: Satır 74-90)
@@ -112,11 +118,11 @@ export default function ContactForm() {
   }
 
   // ──────────────────────────────────────────
-  // Form Gönderme (PDF: Satır 92-117)
-  // e.preventDefault(), validation, simüle API
+  // Form Gönderme - Web3Forms Entegrasyonu
   // ──────────────────────────────────────────
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setSubmitError(null);
 
     // Tüm alanları doğrula
     const newErrors = validate(formData);
@@ -127,14 +133,40 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
     try {
-      // Simüle edilmiş API çağrısı (PDF: Satır 106-109)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form verisi:", formData);
-      setSubmitSuccess(true);
-      setFormData(initialFormData);
-    } catch {
-      // Gerçek projede hata state'i kullan (alert yerine)
-      setErrors({ message: "Gönderim başarısız. Lütfen tekrar deneyin." });
+      if (WEB3FORMS_ACCESS_KEY === "YOUR_ACCESS_KEY_HERE") {
+        // Simüle edilen form gönderimi (Web3Forms anahtarı olmadan)
+        console.log("Simüle edilen form verisi (Lütfen Web3Forms anahtarınızı girin):", formData);
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        setSubmitSuccess(true);
+        setFormData(initialFormData);
+        return;
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: `${formData.name} - Portfolyo İletişim`
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData(initialFormData);
+      } else {
+        setSubmitError(result.message || "Gönderim başarısız. Lütfen tekrar deneyin.");
+      }
+    } catch (err) {
+      setSubmitError("Ağ hatası oluştu. Lütfen bağlantınızı kontrol edin.");
     } finally {
       setIsSubmitting(false);
     }
@@ -215,10 +247,9 @@ export default function ContactForm() {
             bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white
             placeholder:text-slate-400 dark:placeholder:text-slate-600
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
-            ${
-              errors.name
-                ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
-                : "border-slate-200 dark:border-slate-700"
+            ${errors.name
+              ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
+              : "border-slate-200 dark:border-slate-700"
             }`}
         />
         <AnimatePresence>
@@ -258,10 +289,9 @@ export default function ContactForm() {
             bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white
             placeholder:text-slate-400 dark:placeholder:text-slate-600
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
-            ${
-              errors.email
-                ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
-                : "border-slate-200 dark:border-slate-700"
+            ${errors.email
+              ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
+              : "border-slate-200 dark:border-slate-700"
             }`}
         />
         <AnimatePresence>
@@ -298,10 +328,9 @@ export default function ContactForm() {
           className={`w-full border rounded-xl px-4 py-3 text-sm transition-all outline-none
             bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
-            ${
-              errors.subject
-                ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
-                : "border-slate-200 dark:border-slate-700"
+            ${errors.subject
+              ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
+              : "border-slate-200 dark:border-slate-700"
             }`}
         >
           <option value="">Konu seçiniz...</option>
@@ -348,10 +377,9 @@ export default function ContactForm() {
             bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white
             placeholder:text-slate-400 dark:placeholder:text-slate-600
             focus:ring-2 focus:ring-blue-500 focus:border-transparent
-            ${
-              errors.message
-                ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
-                : "border-slate-200 dark:border-slate-700"
+            ${errors.message
+              ? "border-red-400 bg-red-50/50 dark:bg-red-900/10"
+              : "border-slate-200 dark:border-slate-700"
             }`}
         />
         {/* Karakter sayacı */}
@@ -372,16 +400,26 @@ export default function ContactForm() {
             )}
           </AnimatePresence>
           <span
-            className={`text-xs ml-auto font-mono ${
-              formData.message.length < 10
-                ? "text-slate-400"
-                : "text-emerald-500"
-            }`}
+            className={`text-xs ml-auto font-mono ${formData.message.length < 10
+              ? "text-slate-400"
+              : "text-emerald-500"
+              }`}
           >
             {formData.message.length} / 10+
           </span>
         </div>
       </div>
+
+      {/* Hata Mesajı Gösterimi */}
+      {submitError && (
+        <motion.div
+          className="p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 text-xs font-semibold rounded-xl flex items-center gap-2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <span>⚠</span> {submitError}
+        </motion.div>
+      )}
 
       {/* ── Gönder Butonu (PDF: Satır 243-252) ── */}
       <motion.button
@@ -389,10 +427,9 @@ export default function ContactForm() {
         disabled={isSubmitting}
         className={`w-full py-3.5 rounded-xl font-black text-sm uppercase tracking-widest transition-all
           flex items-center justify-center gap-2
-          ${
-            isSubmitting
-              ? "bg-slate-300 dark:bg-slate-700 text-slate-500 cursor-not-allowed"
-              : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5"
+          ${isSubmitting
+            ? "bg-slate-300 dark:bg-slate-700 text-slate-500 cursor-not-allowed"
+            : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-0.5"
           }`}
         whileTap={isSubmitting ? {} : { scale: 0.98 }}
       >

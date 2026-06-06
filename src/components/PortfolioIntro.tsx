@@ -93,6 +93,7 @@ export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode, onCompl
               opacity: [0.4, 1, 0.4],
               scale: [1, 1.2, 1],
               borderRadius: '50%',
+              x: 0,
             } : {
               width: parseInt(item.size.split(' ')[0].replace('w-', '')) * 4,
               height: parseInt(item.size.split(' ')[1].replace('h-', '')) * 4,
@@ -101,12 +102,16 @@ export function PortfolioIntro({ onNavigate, isDarkMode, toggleDarkMode, onCompl
               opacity: 1,
               scale: 1,
               borderRadius: '9999px',
+              x: item.left ? [0, 50, 0] : [0, -50, 0],
             }}
             transition={isDarkMode ? {
               opacity: { duration: 2 + idx, repeat: Infinity },
               scale: { duration: 3 + idx, repeat: Infinity },
               default: { duration: 1 }
-            } : { duration: 1 }}
+            } : {
+              x: { duration: item.delay, repeat: Infinity, ease: "easeInOut" },
+              default: { duration: 1 }
+            }}
           />
         ))}
         
